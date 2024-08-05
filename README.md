@@ -1,9 +1,15 @@
-# music-maker
+# music-maker -- consider name change, to drumix or drumfx
 
 Tech used:
 
 - Drum-machine
-- Tone.js
+- ~~Tone.js: had issue trying to set this up, plus seemed redundant since drum-machine was working~~ 
+- vex flow
+
+
+
+
+
 
 To Do:
 
