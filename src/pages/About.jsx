@@ -1,11 +1,13 @@
 // src/pages/About.js
-import React from 'react';
+import DrumMachine from '../components/DrumMachine';
+import '../drum.css';
 
 const About = () => {
   return (
     <div>
       <h1>About Page</h1>
       <p>Learn more about us on this page.</p>
+      <DrumMachine />
     </div>
   );
 };
