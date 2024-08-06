@@ -2,36 +2,57 @@
 import { useState, useEffect } from 'react';
 
 const drumPads = [
-    { keyCode: 81, key: 'Q', sound: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-1.mp3', label: 'Heater 1' },
-    { keyCode: 87, key: 'W', sound: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-2.mp3', label: 'Heater 2' },
-    { keyCode: 69, key: 'E', sound: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-3.mp3', label: 'Heater 3' },
-    { keyCode: 65, key: 'A', sound: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-4_1.mp3', label: 'Heater 4' },
-    { keyCode: 83, key: 'S', sound: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-6.mp3', label: 'Clap' },
-    { keyCode: 68, key: 'D', sound: 'https://s3.amazonaws.com/freecodecamp/drums/Dsc_Oh.mp3', label: 'Open-HH' },
-    { keyCode: 90, key: 'Z', sound: 'https://s3.amazonaws.com/freecodecamp/drums/Kick_n_Hat.mp3', label: 'Kick-n-Hat' },
-    { keyCode: 88, key: 'X', sound: 'https://s3.amazonaws.com/freecodecamp/drums/RP4_KICK_1.mp3', label: 'Kick' },
-    { keyCode: 67, key: 'C', sound: 'https://s3.amazonaws.com/freecodecamp/drums/Cev_H2.mp3', label: 'Closed-HH' },
-    { keyCode: 49, key: '1', sound: 'https://s3.amazonaws.com/freecodecamp/drums/Chord_1.mp3', label: 'Chord 1' },
-    { keyCode: 50, key: '2', sound: 'https://s3.amazonaws.com/freecodecamp/drums/Chord_2.mp3', label: 'Chord 2' },
-    { keyCode: 51, key: '3', sound: 'https://s3.amazonaws.com/freecodecamp/drums/Chord_3.mp3', label: 'Chord 3' },
-    { keyCode: 52, key: '4', sound: 'https://s3.amazonaws.com/freecodecamp/drums/Give_us_a_light.mp3', label: 'Shaker' },
-    { keyCode: 53, key: '5', sound: 'https://s3.amazonaws.com/freecodecamp/drums/Dry_Ohh.mp3', label: 'Dry-Ohh' },
-    { keyCode: 54, key: '6', sound: 'https://s3.amazonaws.com/freecodecamp/drums/Bld_H1.mp3', label: 'Bld-H1' },
-    { keyCode: 55, key: '7', sound: 'https://s3.amazonaws.com/freecodecamp/drums/punchy_kick_1.mp3', label: 'Punchy Kick' },
-    { keyCode: 56, key: '8', sound: 'https://s3.amazonaws.com/freecodecamp/drums/side_stick_1.mp3', label: 'Side Stick' },
-    { keyCode: 57, key: '9', sound: 'https://s3.amazonaws.com/freecodecamp/drums/Brk_Snr.mp3', label: 'Snare' },
-    { keyCode: 48, key: '0', sound: 'https://s3.amazonaws.com/freecodecamp/drums/Chord_1.mp3', label: 'Chord 1' },
-    { keyCode: 189, key: '-', sound: 'https://s3.amazonaws.com/freecodecamp/drums/Chord_2.mp3', label: 'Chord 2' },
-    { keyCode: 187, key: '=', sound: 'https://s3.amazonaws.com/freecodecamp/drums/Chord_3.mp3', label: 'Chord 3' },
-    { keyCode: 219, key: '[', sound: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-1.mp3', label: 'Heater 1' },
-    { keyCode: 221, key: ']', sound: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-2.mp3', label: 'Heater 2' },
-    { keyCode: 220, key: '\\', sound: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-3.mp3', label: 'Heater 3' },
-    { keyCode: 186, key: ';', sound: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-4_1.mp3', label: 'Heater 4' },
-    { keyCode: 222, key: "'", sound: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-6.mp3', label: 'Clap' },
-    { keyCode: 188, key: ',', sound: 'https://s3.amazonaws.com/freecodecamp/drums/Dsc_Oh.mp3', label: 'Open-HH' },
-    { keyCode: 190, key: '.', sound: 'https://s3.amazonaws.com/freecodecamp/drums/Kick_n_Hat.mp3', label: 'Kick-n-Hat' },
-    { keyCode: 191, key: '/', sound: 'https://s3.amazonaws.com/freecodecamp/drums/RP4_KICK_1.mp3', label: 'Kick' }
-  ];
+  { keyCode: 81, key: 'agogo High', sound: 'sounds/agogoHigh.mp3', label: 'agogô high' }, // key: Q
+  { keyCode: 87, key: 'agogo Low', sound: 'sounds/agogoLow.mp3', label: 'agogô low' }, // key: W
+  { keyCode: 69, key: 'cowbell', sound: 'sounds/cowbell.mp3', label: 'Cowbell' }, // key: E
+  { keyCode: 82, key: 'crash 1', sound: 'sounds/crash1.mp3', label: 'Crash low' }, // key: A
+  { keyCode: 84, key: 'crash choke', sound: 'sounds/crashChoke.mp3', label: 'Crash choke' }, // key: S
+  { keyCode: 89, key: 'crash 2 (high)', sound: 'sounds/crash2.mp3', label: 'Crash 2' }, // key: D
+  { keyCode: 85, key: 'crash 2 choke', sound: 'sounds/crash2Choke.mp3', label: 'Crash 2 choke' }, // key: Z
+  { keyCode: 73, key: 'side-stick 1', sound: 'sounds/crosstick1.mp3', label: 'Side stick 1' }, // key: X
+  { keyCode: 79, key: 'side-stick 2', sound: 'sounds/crosstick2.mp3', label: 'Side stick 2' }, // key: C
+  { keyCode: 80, key: 'floor tom 1', sound: 'sounds/fTom1.mp3', label: 'Floor Tom 1' }, // key: Q
+  { keyCode: 68, key: 'floor tom 2 (low)', sound: 'sounds/fTom2.mp3', label: 'Floor Tom 2' }, // key: W
+  { keyCode: 70, key: 'high-hat pedal', sound: 'sounds/hhFoot1.mp3', label: 'High-hat Pedal' }, // key: E
+  { keyCode: 71, key: 'high-hat (open)', sound: 'sounds/hhO1.mp3', label: 'High-hat Open' }, // key: A
+  { keyCode: 72, key: 'high-hat (closed)', sound: 'sounds/hhX1.mp3', label: 'High-hat Closed' }, // key: S
+  { keyCode: 74, key: 'high tom', sound: 'sounds/hTom1.mp3', label: 'High Tom' }, // key: D
+  { keyCode: 75, key: 'high tom 2', sound: 'sounds/hTom2.mp3', label: 'High Tom 2' }, // key: Z
+  { keyCode: 76, key: 'kick', sound: 'sounds/kick1.mp3', label: 'Kick' }, // key: X
+  { keyCode: 90, key: 'low tom', sound: 'sounds/mTom1.mp3', label: 'Low Tom' }, // key: C
+  { keyCode: 88, key: 'ride bell', sound: 'sounds/rideBell1.mp3', label: 'Ride Bell' }, // key: Q
+  { keyCode: 67, key: 'ride choke', sound: 'sounds/rideChoke1.mp3', label: 'Ride Choke' }, // key: W
+  { keyCode: 86, key: 'ride edge', sound: 'sounds/rideEdge1.mp3', label: 'Ride Edge' }, // key: E
+  { keyCode: 66, key: 'ride bow', sound: 'sounds/rideMid1.mp3', label: 'Ride Bow' }, // key: A
+  { keyCode: 78, key: 'snare rimshot', sound: 'sounds/rimshot1.mp3', label: 'Rimshot' }, // key: S
+  { keyCode: 77, key: 'snare (on)', sound: 'sounds/snareOn1.mp3', label: 'Snare On' }, // key: D
+  { keyCode: 96, key: 'splash', sound: 'sounds/splash1.mp3', label: 'Splash' }, // key: Z
+  { keyCode: 49, key: 'splash choke', sound: 'sounds/splashChoke.mp3', label: 'Splash Choke' }, // key: X];
+];
+
+
+
+
+
+//  const songs = [
+//    { sound: 'sounds/agogoHigh.mp3', title: '01 The Alcoholic - Röyksopp' },
+//    { sound: 'sounds/agogoLow.mp3', title: '01 The Alcoholic - Röyksopp' },
+
+//    { url: 'sounds/shrine.mp3', title: '03 The Shrine (OKIOK Remix) - Jaga Jazzist' },
+//    { url: 'sounds/aumetra.mp3', title: '04 Aumetra the Witch - cYsmix' },
+//    { url: 'sounds/ouroboros.mp3', title: '05 Ouroboros - Beats Antique' },
+//    { url: 'sounds/aurevoir.mp3', title: '06 Aurevoir - Pyramid' },
+//    { url: 'sounds/father.mp3', title: '07 Father - Pyramid' },
+//    { url: 'sounds/panthertrek.mp3', title: '08 Panther Trek - Vessels' },
+//    { url: 'sounds/bhangrasaanj.mp3', title: '09 Bhangra Saanj - Beats Antique' },
+ //   { url: 'sounds/占い師ft.mp3', title: '10 占い師 Fortune Teller - cYsmix' },
+ //   { url: 'sounds/topaz.mp3', title: '11 Topaz - Bazz' },
+//    { url: 'sounds/sunofagun.mp3', title: '12 Sun of a Gun - Bazz' },
+ //   { url: 'sounds/dzjin.mp3', title: '13 Dzjin - cYsmix' },
+ //   { url: 'sounds/starfire.mp3', title: '14 Starfire - Jaga Jazzist' },
+ //   { url: 'sounds/oban.mp3', title: '14 Oban - Jaga Jazzist' },
+//    { url: 'sounds/apex.mp3', title: '14 Apex - Jaga Jazzist' },
+ // ];
 
   function DrumMachine() {
     const [display, setDisplay] = useState('');
