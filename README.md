@@ -13,6 +13,13 @@ Tech used:
 
 To Do:
 
+plan out a really basic one and add things
+
+- Figure out General GUI: 
+  - Posssibilities:
+    - DND
+    - Dropdown lists
+    - grouped icon boxes (like in ms paint)
 - [ ] Add header comp
 - [ ] add footer comp
 - [ ] put nav links in navigation comp
