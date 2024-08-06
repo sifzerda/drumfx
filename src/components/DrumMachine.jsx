@@ -30,30 +30,6 @@ const drumPads = [
   { keyCode: 49, key: 'splash choke', sound: 'sounds/splashChoke.mp3', label: 'Splash Choke' }, // key: X];
 ];
 
-
-
-
-
-//  const songs = [
-//    { sound: 'sounds/agogoHigh.mp3', title: '01 The Alcoholic - Röyksopp' },
-//    { sound: 'sounds/agogoLow.mp3', title: '01 The Alcoholic - Röyksopp' },
-
-//    { url: 'sounds/shrine.mp3', title: '03 The Shrine (OKIOK Remix) - Jaga Jazzist' },
-//    { url: 'sounds/aumetra.mp3', title: '04 Aumetra the Witch - cYsmix' },
-//    { url: 'sounds/ouroboros.mp3', title: '05 Ouroboros - Beats Antique' },
-//    { url: 'sounds/aurevoir.mp3', title: '06 Aurevoir - Pyramid' },
-//    { url: 'sounds/father.mp3', title: '07 Father - Pyramid' },
-//    { url: 'sounds/panthertrek.mp3', title: '08 Panther Trek - Vessels' },
-//    { url: 'sounds/bhangrasaanj.mp3', title: '09 Bhangra Saanj - Beats Antique' },
- //   { url: 'sounds/占い師ft.mp3', title: '10 占い師 Fortune Teller - cYsmix' },
- //   { url: 'sounds/topaz.mp3', title: '11 Topaz - Bazz' },
-//    { url: 'sounds/sunofagun.mp3', title: '12 Sun of a Gun - Bazz' },
- //   { url: 'sounds/dzjin.mp3', title: '13 Dzjin - cYsmix' },
- //   { url: 'sounds/starfire.mp3', title: '14 Starfire - Jaga Jazzist' },
- //   { url: 'sounds/oban.mp3', title: '14 Oban - Jaga Jazzist' },
-//    { url: 'sounds/apex.mp3', title: '14 Apex - Jaga Jazzist' },
- // ];
-
   function DrumMachine() {
     const [display, setDisplay] = useState('');
   
