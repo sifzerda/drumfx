@@ -1,4 +1,4 @@
-# music-maker -- consider name change, to drumix or drumfx
+# music-maker -- consider name change, to  drumfx
 
 Tech used:
 
