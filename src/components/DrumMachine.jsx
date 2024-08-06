@@ -1,6 +1,7 @@
 // src/DrumMachine.js
 import { useState, useEffect } from 'react';
 
+// put this in separate component once finalized
 const drumPads = [
   { keyCode: 81, key: 'agogo High', sound: 'sounds/agogoHigh.mp3', label: 'agogô high' }, // key: Q
   { keyCode: 87, key: 'agogo Low', sound: 'sounds/agogoLow.mp3', label: 'agogô low' }, // key: W

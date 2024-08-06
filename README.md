@@ -20,17 +20,17 @@ To Do:
 - [ ] enable drawing / adding notes to sheet/bar (1/4 basic note)
 - [ ] enable different notes toggle (quaver, semi-quaver etc)
 - [ ] enable playback/playthrough of created sheet
-- [ ] Basic drum sounds:
-  - [ ] Closed hi-hat
-  - [ ] Bass/kick
-  - [ ] Snare (on)
-  - [ ] High tom
-  - [ ] Medium tom
-  - [ ] floor tom
-  - [ ] Ride cymbal
-  - [ ] Crash cymbal
+- [x] Basic drum sounds:
+  - [x] Closed hi-hat
+  - [x] Bass/kick
+  - [x] Snare (on)
+  - [x] High tom
+  - [x] Medium tom
+  - [x] floor tom
+  - [x] Ride cymbal
+  - [x] Crash cymbal
     - [ ] Snare off
-    - [ ] Ride bell
-    - [ ] Open hi-hat
-- [ ] d
+    - [x] Ride bell
+    - [x] Open hi-hat
+- [ ] Put the drum sounds in a separate component once finalized
 - [ ] d
