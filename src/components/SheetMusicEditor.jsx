@@ -2,7 +2,7 @@
 
 // src/SheetMusicEditor.js
 
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Vex from 'vexflow';
 
 const { Renderer, Stave, StaveNote, Voice, Formatter } = Vex.Flow;
