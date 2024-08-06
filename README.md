@@ -8,8 +8,18 @@ Tech used:
 
 
 
-
-
+1. Bar selection ('Add Bar button?'):
+   1. Click from selection: 4/4, 3/4, etc
+      1. Each click adds a bar
+      2. 
+2. Add note: click adds a note 
+   1. from selection: whole, half, 1/4, 1/8, 1/16th, 1/32nd
+3. Clicking the note or right clicking triggers drum pad
+   1. Select drum pad from list ?
+4. Playback
+5. Turn metronome on off 
+   1. Add metronome sound fx (toggle on off)
+6. d
 
 To Do:
 
