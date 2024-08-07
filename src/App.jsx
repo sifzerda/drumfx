@@ -27,10 +27,10 @@ function App() {
               <Link to="/contact">Contact</Link>
             </li>
             <li>
-              <Link to="/spare">Spare</Link>
+              <Link to="/spare">VexFlow</Link>
             </li>
             <li>
-              <Link to="/spare2">Spare2</Link>
+              <Link to="/spare2">ABCjs</Link>
             </li>
           </ul>
         </nav>

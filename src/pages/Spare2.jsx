@@ -1,5 +1,5 @@
 // src/pages/Home.js
-import ABCDjs from '../components/ABCDjs';
+import ABCjs from '../components/ABCjs';
 import '../spare.css';
 
 const Spare = () => {
@@ -8,7 +8,7 @@ const Spare = () => {
         <h1>Spare Page</h1>
         <p>Welcome to the Home Page!</p>
 
-        <ABCDjs />
+        <ABCjs />
 
       </div>
     );
