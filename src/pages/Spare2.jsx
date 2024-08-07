@@ -5,7 +5,7 @@ import '../spare.css';
 const Spare = () => {
     return (
       <div>
-        <h1>Spare Page</h1>
+        <h1>ABCjs Page</h1>
         <p>Welcome to the Home Page!</p>
 
         <ABCjs />
