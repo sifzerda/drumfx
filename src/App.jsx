@@ -7,6 +7,8 @@ import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import Spare from './pages/Spare';
+import Spare2 from './pages/Spare2';
 
 function App() {
 
@@ -14,15 +16,21 @@ function App() {
     <Router>
       <div>
         <nav>
-          <ul style={{ display: 'flex', listStyle: 'none', padding: 0 }}>
-            <li style={{ margin: '0 10px' }}>
+          <ul>
+            <li>
               <Link to="/">Home</Link>
             </li>
-            <li style={{ margin: '0 10px' }}>
+            <li>
               <Link to="/about">About</Link>
             </li>
-            <li style={{ margin: '0 10px' }}>
+            <li>
               <Link to="/contact">Contact</Link>
+            </li>
+            <li>
+              <Link to="/spare">Spare</Link>
+            </li>
+            <li>
+              <Link to="/spare2">Spare2</Link>
             </li>
           </ul>
         </nav>
@@ -31,6 +39,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/spare" element={<Spare />} />
+          <Route path="/spare2" element={<Spare2 />} />
         </Routes>
       </div>
     </Router>
