@@ -8,50 +8,75 @@ const Sheet = () => {
   const divRef = useRef(null);
 
   const addMeasure = () => {
-    setMeasures([...measures, {}]); // Add an empty object to represent a measure
+    setMeasures([...measures, { notes: [] }]);
+  };
+
+  const addQuarterNote = () => {
+    setMeasures((prevMeasures) => {
+      const newMeasures = [...prevMeasures];
+      const lastMeasure = newMeasures[newMeasures.length - 1];
+
+      if (lastMeasure && lastMeasure.notes.length < 4) {
+        lastMeasure.notes.push(new VF.StaveNote({
+          clef: 'treble',
+          keys: ['c/4'], // C4 quarter note
+          duration: 'q', // Quarter note
+        }));
+      }
+
+      return newMeasures;
+    });
   };
 
   useEffect(() => {
     const resizeHandler = () => {
       if (divRef.current) {
-        // Clear the div to re-render
         divRef.current.innerHTML = '';
 
-        // Get the width of the container
         const containerWidth = divRef.current.clientWidth;
-
-        // Calculate the width per measure (4 measures per line)
         const widthPerMeasure = (containerWidth - 20) / 4;
 
-        // Create an SVG renderer and attach it to the div
         const renderer = new VF.Renderer(
           divRef.current,
           VF.Renderer.Backends.SVG
         );
 
-        // Configure the rendering context
         const context = renderer.getContext();
-        const heightPerLine = 150; // Height per stave line
+        const heightPerLine = 150;
 
-        // Calculate the total height needed for all lines
         const numberOfLines = Math.ceil(measures.length / 4);
         renderer.resize(containerWidth, numberOfLines * heightPerLine);
 
-        measures.forEach((_, index) => {
-          // Determine the line number and x, y position for each measure
+        measures.forEach((measure, index) => {
           const lineNumber = Math.floor(index / 4);
-          const x = 10 + (index % 4) * widthPerMeasure; // Divide the width equally among 4 staves
+          const x = 10 + (index % 4) * widthPerMeasure;
           const y = lineNumber * heightPerLine;
 
-          // Create a stave for each measure
           const stave = new VF.Stave(x, y, widthPerMeasure);
           stave.addClef('treble').addTimeSignature('4/4');
           stave.setContext(context).draw();
+
+          if (measure.notes.length > 0) {
+            const voice = new VF.Voice({
+              num_beats: 4,
+              beat_value: 4,
+              resolution: VF.RESOLUTION
+            });
+
+            // Add notes to the voice and ensure there are enough notes to fill the measure
+            voice.addTickables(measure.notes);
+
+            // Create a formatter to format the notes within the measure
+            const formatter = new VF.Formatter().joinVoices([voice]).format([voice], widthPerMeasure - 20);
+
+            // Draw the notes on the stave
+            voice.draw(context, stave);
+          }
         });
       }
     };
 
-    resizeHandler(); // Initial render
+    resizeHandler();
     window.addEventListener('resize', resizeHandler);
 
     return () => {
@@ -62,6 +87,7 @@ const Sheet = () => {
   return (
     <div>
       <button onClick={addMeasure}>Add Bar</button>
+      <button onClick={addQuarterNote}>Add 1/4 Note</button>
       <div ref={divRef} style={{ width: '100%', minHeight: '100vh' }}></div>
     </div>
   );
