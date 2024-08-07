@@ -1,5 +1,5 @@
 // src/SheetMusic.js
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import ABCJS from 'abcjs';
 
 const SheetMusic = () => {
