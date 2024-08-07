@@ -1,5 +1,6 @@
 // src/pages/Home.js
 import Sheet from '../components/Sheet';
+import '../spare.css';
 
 const Spare = () => {
     return (
