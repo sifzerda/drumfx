@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { Howl } from 'howler';
 
 // Define the drum sounds
@@ -7,7 +7,23 @@ const createSound = (src) => new Howl({ src, html5: true });
 const sounds = {
   kick: createSound('../../public/sounds/kick1.mp3'),
   snare: createSound('../../public/sounds/snareOn1.mp3'),
+  // snare types: -------------------------------------//
+        rimshot: createSound('../../public/sounds/rimshot1.mp3'),
+        sidestick: createSound('../../public/sounds/crosstick2.mp3'),
+    // ------------------------------------------------//
   hiHat: createSound('../../public/sounds/hhX1.mp3'),
+  crash: createSound('../../public/sounds/crash1.mp3'),
+    // crash types: -------------------------------------//
+        crashChoke: createSound('../../public/sounds/crashChoke.mp3'),  
+    // --------------------------------------------------//
+  rideCymbal: createSound('../../public/sounds/rideEdge1.mp3'),
+    // ride types: -------------------------------------//
+        rideBell: createSound('../../public/sounds/rideBell1.mp3'),  
+        rideChoke: createSound('../../public/sounds/rideChoke1.mp3'),  
+    //--------------------------------------------------//
+  highTom: createSound('../../public/sounds/hTom1.mp3'),
+  mediumTom: createSound('../../public/sounds/mTom1.mp3'),
+  floorTom: createSound('../../public/sounds/fTom1.mp3'),
 };
 
 // Create a pattern with 16 steps
@@ -18,8 +34,18 @@ const Tab = () => {
     kick: Array(16).fill(false),
     snare: Array(16).fill(false),
     hiHat: Array(16).fill(false),
+    crash: Array(16).fill(false),
+    rideCymbal: Array(16).fill(false),
+    highTom: Array(16).fill(false),
+    mediumTom: Array(16).fill(false),
+    floorTom: Array(16).fill(false),
   });
-  const [tempo, setTempo] = useState(120); // Default tempo
+  
+  const [currentSnare, setCurrentSnare] = useState('snare');
+  const [currentCrash, setCurrentCrash] = useState('crash');
+  const [currentRide, setCurrentRide] = useState('rideCymbal');
+  
+  const [tempo, setTempo] = useState(100); // Default tempo
   const intervalRef = useRef(null);
 
   const toggleNote = (row, step) => {
@@ -38,9 +64,19 @@ const Tab = () => {
 
     const playStep = () => {
       // Play sounds based on the current step
-      if (pattern.kick[step]) sounds.kick.play();
-      if (pattern.snare[step]) sounds.snare.play();
-      if (pattern.hiHat[step]) sounds.hiHat.play();
+      Object.keys(pattern).forEach((drum) => {
+        if (pattern[drum][step]) {
+          if (drum === 'snare') {
+            sounds[currentSnare].play();
+          } else if (drum === 'crash') {
+            sounds[currentCrash].play();
+          } else if (drum === 'rideCymbal') {
+            sounds[currentRide].play();
+          } else {
+            sounds[drum].play();
+          }
+        }
+      });
 
       step = (step + 1) % steps.length;
     };
@@ -54,14 +90,48 @@ const Tab = () => {
       intervalRef.current = null;
     }
     // Stop all sounds (optional, if you want to ensure no sounds are playing when stopped)
-    sounds.kick.stop();
-    sounds.snare.stop();
-    sounds.hiHat.stop();
+    Object.values(sounds).forEach((sound) => sound.stop());
   };
 
   const handleTempoChange = (e) => {
     setTempo(Number(e.target.value));
   };
+
+  const handleRightClick = (e, row) => {
+    e.preventDefault();
+    if (row === 'snare') {
+      const nextSnare = currentSnare === 'snare'
+        ? 'rimshot'
+        : currentSnare === 'rimshot'
+        ? 'sidestick'
+        : 'snare';
+      setCurrentSnare(nextSnare);
+    } else if (row === 'crash') {
+      const nextCrash = currentCrash === 'crash'
+        ? 'crashChoke'
+        : 'crash';
+      setCurrentCrash(nextCrash);
+    } else if (row === 'rideCymbal') {
+      const nextRide = currentRide === 'rideCymbal'
+        ? 'rideBell'
+        : currentRide === 'rideBell'
+        ? 'rideChoke'
+        : 'rideCymbal';
+      setCurrentRide(nextRide);
+    }
+  };
+
+  // Helper component for barlines
+  const Barline = () => (
+    <div
+      style={{
+        width: '2px',
+        height: '100%',
+        backgroundColor: '#333',
+        margin: '0 5px',
+      }}
+    />
+  );
 
   return (
     <div style={{ padding: '20px', textAlign: 'center' }}>
@@ -80,6 +150,17 @@ const Tab = () => {
             padding: '5px',
             fontSize: '16px',
             textAlign: 'center',
+            marginRight: '10px',
+          }}
+        />
+        <input
+          type="range"
+          value={tempo}
+          onChange={handleTempoChange}
+          min="40"
+          max="200"
+          style={{
+            width: '200px',
           }}
         />
         <span style={{ marginLeft: '10px' }}>BPM</span>
@@ -118,23 +199,26 @@ const Tab = () => {
         Stop Pattern
       </button>
 
-      {['hiHat', 'snare', 'kick'].map((row) => (
+      {Object.keys(pattern).map((row) => (
         <div key={row} style={{ marginBottom: '20px' }}>
-          <h2>{row}</h2>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '2px' }}>
+          <h2>{row === 'snare' ? currentSnare : row === 'crash' ? currentCrash : row === 'rideCymbal' ? currentRide : row}</h2>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
             {steps.map((step) => (
-              <button
-                key={step}
-                onClick={() => toggleNote(row, step)}
-                style={{
-                  width: '30px',
-                  height: '30px',
-                  backgroundColor: pattern[row][step] ? '#007bff' : '#ccc',
-                  border: 'none',
-                  borderRadius: '5px',
-                  cursor: 'pointer',
-                }}
-              />
+              <React.Fragment key={step}>
+                <button
+                  onClick={() => toggleNote(row, step)}
+                  onContextMenu={(e) => handleRightClick(e, row)} // Add right-click handler for all rows
+                  style={{
+                    width: '30px',
+                    height: '30px',
+                    backgroundColor: pattern[row][step] ? '#007bff' : '#ccc',
+                    border: 'none',
+                    borderRadius: '5px',
+                    cursor: 'pointer',
+                  }}
+                />
+                {(step + 1) % 8 === 0 && <Barline />} {/* Insert barline every 8 steps */}
+              </React.Fragment>
             ))}
           </div>
         </div>
