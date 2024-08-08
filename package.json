@@ -12,6 +12,7 @@
   "dependencies": {
     "abcjs": "^6.4.2",
     "drum-machine": "^3.0.2",
+    "howler": "^2.2.4",
     "react": "^18.2.0",
     "react-dnd": "^16.0.1",
     "react-dom": "^18.2.0",
