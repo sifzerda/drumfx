@@ -57,6 +57,18 @@ const SheetMusic = () => {
     }
   };
 
+  const handleEighthNoteClick = () => {
+    if (selectedNoteIndex !== null) {
+      const notes = score.split(/\s+/);
+      if (notes[selectedNoteIndex] === 'c2') {
+        notes[selectedNoteIndex] = 'c1 c1'; // Split half note into two quaver notes
+        const updatedScore = notes.join(' ');
+        setScore(updatedScore);
+        setSelectedNoteIndex(null); // Deselect after conversion
+      }
+    }
+  };
+
   useEffect(() => {
     if (score) {
       ABCJS.renderAbc("abcjs-container", `X:1\nT:Title\nM:4/4\nK:C\n${score}`);
@@ -69,6 +81,7 @@ const SheetMusic = () => {
       <button onClick={handleFullNoteClick}>Add Whole Note</button>
       <button onClick={handleHalfNoteClick}>Add 1/2 Note</button>
       <button onClick={handleQuarterNoteClick}>Add 1/4 Note</button>
+      <button onClick={handleEighthNoteClick}>Add 1/8 Note</button>
       <div id="abcjs-container"></div>
       <div>
         {score.split(/\s+/).map((note, index) => (
