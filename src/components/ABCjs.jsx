@@ -61,7 +61,7 @@ const SheetMusic = () => {
     if (selectedNoteIndex !== null) {
       const notes = score.split(/\s+/);
       if (notes[selectedNoteIndex] === 'c2') {
-        notes[selectedNoteIndex] = 'c1 c1'; // Split half note into two quaver notes
+        notes[selectedNoteIndex] = 'c1 c1'; // Split half note into two eighth notes
         const updatedScore = notes.join(' ');
         setScore(updatedScore);
         setSelectedNoteIndex(null); // Deselect after conversion
@@ -74,7 +74,20 @@ const SheetMusic = () => {
     if (selectedNoteIndex !== null) {
       const notes = score.split(/\s+/);
       if (notes[selectedNoteIndex] === 'c1') {
-        notes[selectedNoteIndex] = 'c/ c/'; // Split quaver note into two 16th notes
+        notes[selectedNoteIndex] = 'c/ c/'; // Split eighth note into two 16th notes
+        const updatedScore = notes.join(' ');
+        setScore(updatedScore);
+        setSelectedNoteIndex(null); // Deselect after conversion
+      }
+    }
+  };
+
+  // Function to handle the 32nd note conversion
+  const handleThirtySecondNoteClick = () => {
+    if (selectedNoteIndex !== null) {
+      const notes = score.split(/\s+/);
+      if (notes[selectedNoteIndex] === 'c/') {
+        notes[selectedNoteIndex] = 'c// c//'; // Split 16th note into two 32nd notes
         const updatedScore = notes.join(' ');
         setScore(updatedScore);
         setSelectedNoteIndex(null); // Deselect after conversion
@@ -95,7 +108,8 @@ const SheetMusic = () => {
       <button onClick={handleHalfNoteClick}>Add 1/2 Note</button>
       <button onClick={handleQuarterNoteClick}>Add 1/4 Note</button>
       <button onClick={handleEighthNoteClick}>Add 1/8 Note</button>
-      <button onClick={handleSixteenthNoteClick}>Make 16th Note</button> {/* New button */}
+      <button onClick={handleSixteenthNoteClick}>Make 16th Note</button>
+      <button onClick={handleThirtySecondNoteClick}>Make 32nd Note</button> {/* New button */}
       <div id="abcjs-container"></div>
       <div>
         {score.split(/\s+/).map((note, index) => (
