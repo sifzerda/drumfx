@@ -4,7 +4,7 @@ import ABCJS from 'abcjs';
 const SheetMusic = () => {
   const [score, setScore] = useState('');
   const [barCount, setBarCount] = useState(0);
-  const [selectedRestIndex, setSelectedRestIndex] = useState(null);
+  const [selectedNoteIndex, setSelectedNoteIndex] = useState(null);
 
   const addBar = () => {
     const newBar = ' | ' + 'z4' + ' '.repeat(8); // Adds a 4/4 bar with rests
@@ -24,12 +24,24 @@ const SheetMusic = () => {
   };
 
   const handleFullNoteClick = () => {
-    if (selectedRestIndex !== null) {
+    if (selectedNoteIndex !== null) {
       const notes = score.split(/\s+/);
-      notes[selectedRestIndex] = 'c4'; // Replace selected rest with a full note (e.g., 'c4' for a quarter note)
+      notes[selectedNoteIndex] = 'c4'; // Replace selected rest with a full note (e.g., 'c4' for a quarter note)
       const updatedScore = notes.join(' ');
       setScore(updatedScore);
-      setSelectedRestIndex(null); // Deselect after conversion
+      setSelectedNoteIndex(null); // Deselect after conversion
+    }
+  };
+
+  const handleHalfNoteClick = () => {
+    if (selectedNoteIndex !== null) {
+      const notes = score.split(/\s+/);
+      if (notes[selectedNoteIndex] === 'c4') {
+        notes[selectedNoteIndex] = 'c2 c2'; // Split full note into two half notes
+        const updatedScore = notes.join(' ');
+        setScore(updatedScore);
+        setSelectedNoteIndex(null); // Deselect after conversion
+      }
     }
   };
 
@@ -42,7 +54,8 @@ const SheetMusic = () => {
   return (
     <div>
       <button onClick={addBar}>Add 4/4 Bar</button>
-      <button onClick={handleFullNoteClick}>Add Note</button>
+      <button onClick={handleFullNoteClick}>Add Whole Note</button>
+      <button onClick={handleHalfNoteClick}>Add 1/2 Note</button>
       <div id="abcjs-container"></div>
       <div>
         {score.split(/\s+/).map((note, index) => (
@@ -51,9 +64,9 @@ const SheetMusic = () => {
             style={{
               marginRight: '5px',
               cursor: 'pointer',
-              color: index === selectedRestIndex ? 'blue' : note.startsWith('z') ? 'red' : 'black'
+              color: index === selectedNoteIndex ? 'blue' : note.startsWith('z') ? 'red' : 'black'
             }}
-            onClick={() => note.startsWith('z') && setSelectedRestIndex(index)}
+            onClick={() => setSelectedNoteIndex(index)}
           >
             {note}
           </span>
