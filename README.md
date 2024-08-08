@@ -2,9 +2,9 @@
 
 Tech used:
 
-- Drum-machine
+- Drum-machine;
 - ~~Tone.js: had issue trying to set this up, plus seemed redundant since drum-machine was working~~ 
-- vex flow
+- Vex flow: tried this but had issues with adding notes. 
 
 
 
