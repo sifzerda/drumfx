@@ -2,11 +2,12 @@ import React, { useState, useRef } from 'react';
 import { Howl } from 'howler';
 
 // Define the drum sounds
+const createSound = (src) => new Howl({ src, html5: true });
+
 const sounds = {
-  kick: new Howl({ src: ['../../public/sounds/kick1.mp3'] }),
-  snare: new Howl({ src: ['../../public/sounds/snareOn1.mp3'] }),
-  hiHat: new Howl({ src: ['../../public/sounds/hhX1.mp3'] }),
-  // Add more sounds as needed
+  kick: createSound('../../public/sounds/kick1.mp3'),
+  snare: createSound('../../public/sounds/snareOn1.mp3'),
+  hiHat: createSound('../../public/sounds/hhX1.mp3'),
 };
 
 // Create a pattern with 16 steps
@@ -36,11 +37,6 @@ const Tab = () => {
     const stepInterval = 60000 / tempo / 4; // Calculate interval time for the current tempo
 
     const playStep = () => {
-      // Clear the current sounds
-      sounds.kick.stop();
-      sounds.snare.stop();
-      sounds.hiHat.stop();
-
       // Play sounds based on the current step
       if (pattern.kick[step]) sounds.kick.play();
       if (pattern.snare[step]) sounds.snare.play();
@@ -57,7 +53,7 @@ const Tab = () => {
       clearInterval(intervalRef.current);
       intervalRef.current = null;
     }
-    // Stop all sounds when stopped
+    // Stop all sounds (optional, if you want to ensure no sounds are playing when stopped)
     sounds.kick.stop();
     sounds.snare.stop();
     sounds.hiHat.stop();
