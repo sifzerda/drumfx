@@ -69,6 +69,19 @@ const SheetMusic = () => {
     }
   };
 
+  // Function to handle the 16th note conversion
+  const handleSixteenthNoteClick = () => {
+    if (selectedNoteIndex !== null) {
+      const notes = score.split(/\s+/);
+      if (notes[selectedNoteIndex] === 'c1') {
+        notes[selectedNoteIndex] = 'c/ c/'; // Split quaver note into two 16th notes
+        const updatedScore = notes.join(' ');
+        setScore(updatedScore);
+        setSelectedNoteIndex(null); // Deselect after conversion
+      }
+    }
+  };
+
   useEffect(() => {
     if (score) {
       ABCJS.renderAbc("abcjs-container", `X:1\nT:Title\nM:4/4\nK:C\n${score}`);
@@ -82,6 +95,7 @@ const SheetMusic = () => {
       <button onClick={handleHalfNoteClick}>Add 1/2 Note</button>
       <button onClick={handleQuarterNoteClick}>Add 1/4 Note</button>
       <button onClick={handleEighthNoteClick}>Add 1/8 Note</button>
+      <button onClick={handleSixteenthNoteClick}>Make 16th Note</button> {/* New button */}
       <div id="abcjs-container"></div>
       <div>
         {score.split(/\s+/).map((note, index) => (
