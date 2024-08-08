@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Howl } from 'howler';
+import abcjs from 'abcjs';
 
 // Define the drum sounds
 const createSound = (src) => new Howl({ src, html5: true });
@@ -7,20 +8,14 @@ const createSound = (src) => new Howl({ src, html5: true });
 const sounds = {
   kick: createSound('../../public/sounds/kick1.mp3'),
   snare: createSound('../../public/sounds/snareOn1.mp3'),
-  // snare types: -------------------------------------//
-        rimshot: createSound('../../public/sounds/rimshot1.mp3'),
-        sidestick: createSound('../../public/sounds/crosstick2.mp3'),
-    // ------------------------------------------------//
+  rimshot: createSound('../../public/sounds/rimshot1.mp3'),
+  sidestick: createSound('../../public/sounds/crosstick2.mp3'),
   hiHat: createSound('../../public/sounds/hhX1.mp3'),
   crash: createSound('../../public/sounds/crash1.mp3'),
-    // crash types: -------------------------------------//
-        crashChoke: createSound('../../public/sounds/crashChoke.mp3'),  
-    // --------------------------------------------------//
+  crashChoke: createSound('../../public/sounds/crashChoke.mp3'),
   rideCymbal: createSound('../../public/sounds/rideEdge1.mp3'),
-    // ride types: -------------------------------------//
-        rideBell: createSound('../../public/sounds/rideBell1.mp3'),  
-        rideChoke: createSound('../../public/sounds/rideChoke1.mp3'),  
-    //--------------------------------------------------//
+  rideBell: createSound('../../public/sounds/rideBell1.mp3'),
+  rideChoke: createSound('../../public/sounds/rideChoke1.mp3'),
   highTom: createSound('../../public/sounds/hTom1.mp3'),
   mediumTom: createSound('../../public/sounds/mTom1.mp3'),
   floorTom: createSound('../../public/sounds/fTom1.mp3'),
@@ -40,13 +35,14 @@ const Tab = () => {
     mediumTom: Array(16).fill(false),
     floorTom: Array(16).fill(false),
   });
-  
+
   const [currentSnare, setCurrentSnare] = useState('snare');
   const [currentCrash, setCurrentCrash] = useState('crash');
   const [currentRide, setCurrentRide] = useState('rideCymbal');
-  
+
   const [tempo, setTempo] = useState(100); // Default tempo
   const intervalRef = useRef(null);
+  const sheetRef = useRef(null);
 
   const toggleNote = (row, step) => {
     const newPattern = { ...pattern };
@@ -121,7 +117,6 @@ const Tab = () => {
     }
   };
 
-  // Helper component for barlines
   const Barline = () => (
     <div
       style={{
@@ -132,6 +127,19 @@ const Tab = () => {
       }}
     />
   );
+
+  const transposeToSheet = () => {
+    // Create ABC notation based on the pattern
+    let abcNotation = 'X:1\nT:Drum Pattern\nM:4/4\nL:1/4\nK:C\n';
+
+    Object.keys(pattern).forEach((drum, rowIndex) => {
+      let drumPattern = pattern[drum].map((hit) => (hit ? 'x' : '-')).join('');
+      abcNotation += `V:1\n${drumPattern} | `;
+    });
+
+    // Display the sheet music using abcjs
+    abcjs.renderAbc(sheetRef.current, abcNotation);
+  };
 
   return (
     <div style={{ padding: '20px', textAlign: 'center' }}>
@@ -198,6 +206,26 @@ const Tab = () => {
       >
         Stop Pattern
       </button>
+
+      <button
+        onClick={transposeToSheet}
+        style={{
+          padding: '10px 20px',
+          fontSize: '16px',
+          backgroundColor: '#28a745',
+          color: 'white',
+          border: 'none',
+          borderRadius: '5px',
+          cursor: 'pointer',
+          marginBottom: '20px',
+        }}
+      >
+        Add Sheet
+      </button>
+
+      <div ref={sheetRef} style={{ marginTop: '20px' }}>
+        {/* Sheet music will be rendered here */}
+      </div>
 
       {Object.keys(pattern).map((row) => (
         <div key={row} style={{ marginBottom: '20px' }}>
