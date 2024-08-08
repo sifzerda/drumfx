@@ -26,7 +26,7 @@ const SheetMusic = () => {
   const handleFullNoteClick = () => {
     if (selectedNoteIndex !== null) {
       const notes = score.split(/\s+/);
-      notes[selectedNoteIndex] = 'c4'; // Replace selected rest with a full note (e.g., 'c4' for a quarter note)
+      notes[selectedNoteIndex] = 'c8'; // Replace selected rest with a full note
       const updatedScore = notes.join(' ');
       setScore(updatedScore);
       setSelectedNoteIndex(null); // Deselect after conversion
@@ -36,8 +36,20 @@ const SheetMusic = () => {
   const handleHalfNoteClick = () => {
     if (selectedNoteIndex !== null) {
       const notes = score.split(/\s+/);
+      if (notes[selectedNoteIndex] === 'c8') {
+        notes[selectedNoteIndex] = 'c4 c4'; // Split full note into two half notes
+        const updatedScore = notes.join(' ');
+        setScore(updatedScore);
+        setSelectedNoteIndex(null); // Deselect after conversion
+      }
+    }
+  };
+
+  const handleQuarterNoteClick = () => {
+    if (selectedNoteIndex !== null) {
+      const notes = score.split(/\s+/);
       if (notes[selectedNoteIndex] === 'c4') {
-        notes[selectedNoteIndex] = 'c2 c2'; // Split full note into two half notes
+        notes[selectedNoteIndex] = 'c2 c2'; // Split half note into two quarter notes
         const updatedScore = notes.join(' ');
         setScore(updatedScore);
         setSelectedNoteIndex(null); // Deselect after conversion
@@ -56,6 +68,7 @@ const SheetMusic = () => {
       <button onClick={addBar}>Add 4/4 Bar</button>
       <button onClick={handleFullNoteClick}>Add Whole Note</button>
       <button onClick={handleHalfNoteClick}>Add 1/2 Note</button>
+      <button onClick={handleQuarterNoteClick}>Add 1/4 Note</button>
       <div id="abcjs-container"></div>
       <div>
         {score.split(/\s+/).map((note, index) => (
