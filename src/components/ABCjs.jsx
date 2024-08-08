@@ -1,10 +1,36 @@
 import { useState, useEffect } from 'react';
 import ABCJS from 'abcjs';
+import * as Tone from 'tone';
 
 const SheetMusic = () => {
   const [score, setScore] = useState('');
   const [barCount, setBarCount] = useState(0);
   const [selectedNoteIndex, setSelectedNoteIndex] = useState(null);
+
+  // Initialize Tone.js Synth and Player
+  const synth = new Tone.Synth().toDestination();
+  const kickPlayer = new Tone.Player('/sounds/kick1.mp3').toDestination(); 
+
+  // Function to play a note
+  const playNote = (note) => {
+    // Note conversion for Tone.js
+    const noteMap = {
+      'c8': 'C4',
+      'c,8': 'C3',
+      'c4': 'C4',
+      'c,4': 'C3',
+      'c2': 'C4',
+      'c,2': 'C3',
+      'c1': 'C4',
+      'c,1': 'C3',
+      'c/': 'C4',
+      'c//': 'C4',
+    };
+    const toneNote = noteMap[note];
+    if (toneNote) {
+      synth.triggerAttackRelease(toneNote, '8n');
+    }
+  };
 
   const addBar = () => {
     const newBar = ' | ' + 'z4' + ' '.repeat(8); // Adds a 4/4 bar with rests
@@ -69,7 +95,6 @@ const SheetMusic = () => {
     }
   };
 
-  // Function to handle the 16th note conversion
   const handleSixteenthNoteClick = () => {
     if (selectedNoteIndex !== null) {
       const notes = score.split(/\s+/);
@@ -82,7 +107,6 @@ const SheetMusic = () => {
     }
   };
 
-  // Function to handle the 32nd note conversion
   const handleThirtySecondNoteClick = () => {
     if (selectedNoteIndex !== null) {
       const notes = score.split(/\s+/);
@@ -91,6 +115,59 @@ const SheetMusic = () => {
         const updatedScore = notes.join(' ');
         setScore(updatedScore);
         setSelectedNoteIndex(null); // Deselect after conversion
+      }
+    }
+  };
+
+  const handleKickButtonClick = () => {
+    if (selectedNoteIndex !== null) {
+      const notes = score.split(/\s+/);
+      const selectedNote = notes[selectedNoteIndex];
+      // Define the bottom line position for different note types
+      const noteTypes = {
+        'c8': 'c,8',
+        'c4': 'c,4',
+        'c2': 'c,2',
+        'c1': 'c,1',
+        'c/': 'c,/',
+        'c//': 'c,//'
+      };
+      const newNote = noteTypes[selectedNote];
+      if (newNote) {
+        notes[selectedNoteIndex] = newNote; // Move the note to the bottom line
+        const updatedScore = notes.join(' ');
+        setScore(updatedScore);
+        setSelectedNoteIndex(null); // Deselect after conversion
+
+        // Play the kick note sound
+        kickPlayer.start();
+      }
+    }
+  };
+
+  const handleHiHatButtonClick = () => {
+    if (selectedNoteIndex !== null) {
+      const notes = score.split(/\s+/);
+      const selectedNote = notes[selectedNoteIndex];
+      
+      // Define the top line position for different note types
+      const noteTypes = {
+        'c8': 'x',
+        'c4': 'x',
+        'c2': 'x',
+        'c1': 'x',
+        'c/': 'x',
+        'c//': 'x'
+      };
+      const newNote = noteTypes[selectedNote];
+      if (newNote) {
+        notes[selectedNoteIndex] = newNote; // Move the note to the top line as 'x'
+        const updatedScore = notes.join(' ');
+        setScore(updatedScore);
+        setSelectedNoteIndex(null); // Deselect after conversion
+
+        // Optional: Add sound for Hi-Hat if needed
+        // playHiHat();
       }
     }
   };
@@ -109,7 +186,9 @@ const SheetMusic = () => {
       <button onClick={handleQuarterNoteClick}>Add 1/4 Note</button>
       <button onClick={handleEighthNoteClick}>Add 1/8 Note</button>
       <button onClick={handleSixteenthNoteClick}>Make 16th Note</button>
-      <button onClick={handleThirtySecondNoteClick}>Make 32nd Note</button> {/* New button */}
+      <button onClick={handleThirtySecondNoteClick}>Make 32nd Note</button>
+      <button onClick={handleKickButtonClick}>Kick</button> {/* Kick Button */}
+      <button onClick={handleHiHatButtonClick}>Hi-Hat</button> {/* Hi-Hat Button */}
       <div id="abcjs-container"></div>
       <div>
         {score.split(/\s+/).map((note, index) => (

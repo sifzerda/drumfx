@@ -11,16 +11,16 @@ const Sheet = () => {
     setMeasures([...measures, { notes: [] }]);
   };
 
-  const addQuarterNote = () => {
+  const addFullNote = () => {
     setMeasures((prevMeasures) => {
       const newMeasures = [...prevMeasures];
       const lastMeasure = newMeasures[newMeasures.length - 1];
 
-      if (lastMeasure && lastMeasure.notes.length < 4) {
+      if (lastMeasure && lastMeasure.notes.length === 0) {
         lastMeasure.notes.push(new VF.StaveNote({
           clef: 'treble',
-          keys: ['c/4'], // C4 quarter note
-          duration: 'q', // Quarter note
+          keys: ['c/4'], // C4 whole note
+          duration: 'w', // Whole note
         }));
       }
 
@@ -63,7 +63,7 @@ const Sheet = () => {
               resolution: VF.RESOLUTION
             });
 
-            // Add notes to the voice and ensure there are enough notes to fill the measure
+            // Add notes to the voice
             voice.addTickables(measure.notes);
 
             // Create a formatter to format the notes within the measure
@@ -87,7 +87,7 @@ const Sheet = () => {
   return (
     <div>
       <button onClick={addMeasure}>Add Bar</button>
-      <button onClick={addQuarterNote}>Add 1/4 Note</button>
+      <button onClick={addFullNote}>Add Whole Note</button>
       <div ref={divRef} style={{ width: '100%', minHeight: '100vh' }}></div>
     </div>
   );
