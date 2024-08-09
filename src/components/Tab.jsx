@@ -134,13 +134,13 @@ const Tab = () => {
   const transposeToSheet = () => {
     // Clone the current pattern to append to bars
     const newPattern = JSON.parse(JSON.stringify(pattern));
-
+  
     setBars((prevBars) => {
       const newBars = [...prevBars, newPattern];
-
+  
       // Create ABC notation for all bars
       let abcNotation = "X:1\nT:Drum Pattern\nM:4/4\nL:1/16\nK:C\n";
-
+  
       // Map each drum to a unique note representation
       const drumMap = {
         kick: "C,,",
@@ -152,8 +152,14 @@ const Tab = () => {
         mediumTom: "B,,",
         floorTom: "C,",
       };
-
-      newBars.forEach((bar) => {
+  
+      // Group bars into sets of four for line breaks
+      let barCount = 0;
+      newBars.forEach((bar, index) => {
+        if (barCount > 0 && barCount % 4 === 0) {
+          abcNotation += "\n"; // Add a line break every four bars
+        }
+  
         for (let step = 0; step < 16; step++) {
           let stepPattern = "";
           Object.keys(bar).forEach((drum) => {
@@ -165,11 +171,13 @@ const Tab = () => {
           abcNotation += stepPattern ? `[${stepPattern}]` : "z";
         }
         abcNotation += "|"; // Add a barline at the end of each bar
+  
+        barCount++;
       });
-
+  
       // Render the entire notation
       abcjs.renderAbc(sheetRef.current, abcNotation);
-
+  
       return newBars;
     });
   };
