@@ -64,13 +64,85 @@ function DrumMachine() {
     }
   };
 
+    // handle kick button click
+    const handleKickButtonClick = () => {
+      const kickPad = drumPads.find((p) => p.key === 'kick');
+      if (kickPad) {
+        playSound(kickPad.key, kickPad.label);
+      }
+    };
+  
+    // handle high-hat button click
+    const handleHighHatButtonClick = () => {
+      const highHatPad = drumPads.find((p) => p.key === 'high-hat (closed)');
+      if (highHatPad) {
+        playSound(highHatPad.key, highHatPad.label);
+      }
+    };
+
+        // handle crash button click
+        const handleCrashButtonClick = () => {
+          const highHatPad = drumPads.find((p) => p.key === 'crash 1');
+          if (highHatPad) {
+            playSound(highHatPad.key, highHatPad.label);
+          }
+        };
+
+                // handle crash button click
+                const handleRideButtonClick = () => {
+                  const highHatPad = drumPads.find((p) => p.key === 'ride edge');
+                  if (highHatPad) {
+                    playSound(highHatPad.key, highHatPad.label);
+                  }
+                };
+
+                        // handle crash button click
+        const handleHighHatPedalButtonClick = () => {
+          const highHatPad = drumPads.find((p) => p.key === 'high-hat pedal');
+          if (highHatPad) {
+            playSound(highHatPad.key, highHatPad.label);
+          }
+        };
+
+                // handle crash button click
+                const handleHighButtonClick = () => {
+                  const highHatPad = drumPads.find((p) => p.key === 'high tom 2');
+                  if (highHatPad) {
+                    playSound(highHatPad.key, highHatPad.label);
+                  }
+                };
+
+                        // handle crash button click
+        const handleMedButtonClick = () => {
+          const highHatPad = drumPads.find((p) => p.key === 'low tom');
+          if (highHatPad) {
+            playSound(highHatPad.key, highHatPad.label);
+          }
+        };
+
+                // handle crash button click
+                const handleFloorButtonClick = () => {
+                  const highHatPad = drumPads.find((p) => p.key === 'floor tom 1');
+                  if (highHatPad) {
+                    playSound(highHatPad.key, highHatPad.label);
+                  }
+                };
+
   return (
     <div>
       <div className="image-container" style={{ position: 'relative' }}>
         <img src={drumKitPic} alt="Drum Machine" style={{ width: '100%' }} />
         {/* Non-working button layered over the image */}
-        <button className='snare-btn' onClick={handleSnareButtonClick}></button>
-        
+        <button className="snare-btn" onClick={handleSnareButtonClick}></button>
+        <button className="kick-btn" onClick={handleKickButtonClick}></button>
+        <button className="hihat-btn" onClick={handleHighHatButtonClick}></button>
+        <button className="crash-btn" onClick={handleCrashButtonClick}></button>
+        <button className="ride-btn" onClick={handleRideButtonClick}></button>
+        <button className="hihat-pedal-btn" onClick={handleHighHatPedalButtonClick}></button>
+        <button className="high-tom-btn" onClick={handleHighButtonClick}></button>
+        <button className="med-tom-btn" onClick={handleMedButtonClick}></button>
+        <button className="floor-tom-btn" onClick={handleFloorButtonClick}></button>
+ 
       </div>
       <div className="drum-machine" id="drum-machine">
         <div className="display" id="display">{display}</div>
