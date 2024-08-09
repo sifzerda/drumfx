@@ -65,7 +65,10 @@
 .hihat-pedal-btn,
 .high-tom-btn,
 .med-tom-btn,
-.floor-tom-btn {
+.floor-tom-btn,
+.agogo1-btn,
+.agogo2-btn,
+.cowbell-btn {
   position: absolute;
   background-color: transparent;
   border-radius: 50%;
@@ -90,8 +93,6 @@
   height: 12vw;
   padding: 25px 25px;
   border: solid 2px rgb(234, 0, 255) !important;
-  border-radius: 50%;
-  cursor: pointer;
   font-size: 16px;
   z-index: 3;
 }
@@ -103,8 +104,6 @@
   height: 5.5vw;
   padding: 25px 25px;
   border: solid 2px rgb(255, 17, 0) !important;
-  border-radius: 50%;
-  cursor: pointer;
   font-size: 16px;
   z-index: 4;
 }
@@ -116,8 +115,6 @@
   height: 10vw;
   padding: 25px 25px;
   border: solid 2px rgb(0, 255, 234) !important;
-  border-radius: 50%;
-  cursor: pointer;
   font-size: 16px;
   z-index: 11;
 }
@@ -129,8 +126,6 @@
   height: 8vw;
   padding: 25px 25px;
   border: solid 2px rgb(2, 53, 49) !important;
-  border-radius: 50%;
-  cursor: pointer;
   font-size: 16px;
   z-index: 5;
 }
@@ -142,8 +137,6 @@
   height: 12vw;
   padding: 25px 25px;
   border: solid 2px rgb(4, 0, 255) !important;
-  border-radius: 50%;
-  cursor: pointer;
   font-size: 16px;
   z-index: 6;
 }
@@ -155,8 +148,6 @@
   height: 3vh;
   padding: 25px 25px;
   border: solid 2px rgb(255, 153, 0) !important;
-  border-radius: 50%;
-  cursor: pointer;
   font-size: 16px;
   z-index: 7;
 }
@@ -168,8 +159,6 @@
   height: 6vw;
   padding: 25px 25px;
   border: solid 2px rgb(12, 78, 29) !important;
-  border-radius: 50%;
-  cursor: pointer;
   font-size: 16px;
   z-index: 8;
 }
@@ -181,8 +170,6 @@
   height: 6vw;
   padding: 25px 25px;
   border: solid 2px rgb(99, 91, 100) !important;
-  border-radius: 50%;
-  cursor: pointer;
   font-size: 16px;
   z-index: 9;
 }
@@ -194,8 +181,39 @@
   height: 9vw;
   padding: 25px 25px;
   border: solid 2px rgb(255, 238, 0) !important;
-  border-radius: 50%;
-  cursor: pointer;
+  font-size: 16px;
+  z-index: 10;
+}
+
+.agogo1-btn {
+  top: 37%;
+  left: 32%;
+  width: 3vw;
+  height: 3vw;
+  padding: 25px 25px;
+  border: solid 2px rgb(255, 238, 0) !important;
+  font-size: 16px;
+  z-index: 10;
+}
+
+.agogo2-btn {
+  top: 36%;
+  left: 27%;
+  width: 6vw;
+  height: 3vh;
+  padding: 25px 25px;
+  border: solid 2px rgb(255, 17, 0) !important;
+  font-size: 16px;
+  z-index: 10;
+}
+
+.cowbell-btn {
+  top: 35%;
+  left: 62%;
+  width: 5vw;
+  height: 5vw;
+  padding: 25px 25px;
+  border: solid 2px rgb(9, 255, 0) !important;
   font-size: 16px;
   z-index: 10;
 }

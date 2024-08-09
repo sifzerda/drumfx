@@ -64,77 +64,101 @@ function DrumMachine() {
     }
   };
 
-    // handle kick button click
-    const handleKickButtonClick = () => {
-      const kickPad = drumPads.find((p) => p.key === 'kick');
-      if (kickPad) {
-        playSound(kickPad.key, kickPad.label);
-      }
-    };
-  
-    // handle high-hat button click
-    const handleHighHatButtonClick = () => {
-      const highHatPad = drumPads.find((p) => p.key === 'high-hat (closed)');
-      if (highHatPad) {
-        playSound(highHatPad.key, highHatPad.label);
-      }
-    };
+  // handle kick button click
+  const handleKickButtonClick = () => {
+    const kickPad = drumPads.find((p) => p.key === 'kick');
+    if (kickPad) {
+      playSound(kickPad.key, kickPad.label);
+    }
+  };
 
-        // handle crash button click
-        const handleCrashButtonClick = () => {
-          const crashPad = drumPads.find((p) => p.key === 'crash 2 (high)');
-          if (crashPad) {
-            playSound(crashPad.key, crashPad.label);
-          }
-        };
+  // handle high-hat button click
+  const handleHighHatButtonClick = () => {
+    const highHatPad = drumPads.find((p) => p.key === 'high-hat (closed)');
+    if (highHatPad) {
+      playSound(highHatPad.key, highHatPad.label);
+    }
+  };
 
-                // handle crash button click
-                const handleCrash2ButtonClick = () => {
-                  const crash2Pad = drumPads.find((p) => p.key === 'crash 1');
-                  if (crash2Pad) {
-                    playSound(crash2Pad.key, crash2Pad.label);
-                  }
-                };
+  // handle crash button click
+  const handleCrashButtonClick = () => {
+    const crashPad = drumPads.find((p) => p.key === 'crash 2 (high)');
+    if (crashPad) {
+      playSound(crashPad.key, crashPad.label);
+    }
+  };
 
-                // handle crash button click
-                const handleRideButtonClick = () => {
-                  const ridePad = drumPads.find((p) => p.key === 'ride edge');
-                  if (ridePad) {
-                    playSound(ridePad.key, ridePad.label);
-                  }
-                };
+  // handle crash2 button click
+  const handleCrash2ButtonClick = () => {
+    const crash2Pad = drumPads.find((p) => p.key === 'crash 1');
+    if (crash2Pad) {
+      playSound(crash2Pad.key, crash2Pad.label);
+    }
+  };
 
-                        // handle crash button click
-        const handleHighHatPedalButtonClick = () => {
-          const highHatPedalPad = drumPads.find((p) => p.key === 'high-hat pedal');
-          if (highHatPedalPad) {
-            playSound(highHatPedalPad.key, highHatPedalPad.label);
-          }
-        };
+  // handle ride button click
+  const handleRideButtonClick = () => {
+    const ridePad = drumPads.find((p) => p.key === 'ride edge');
+    if (ridePad) {
+      playSound(ridePad.key, ridePad.label);
+    }
+  };
 
-                // handle crash button click
-                const handleHighButtonClick = () => {
-                  const highPad = drumPads.find((p) => p.key === 'high tom 2');
-                  if (highPad) {
-                    playSound(highPad.key, highPad.label);
-                  }
-                };
+  // handle hh pedal button click
+  const handleHighHatPedalButtonClick = () => {
+    const highHatPedalPad = drumPads.find((p) => p.key === 'high-hat pedal');
+    if (highHatPedalPad) {
+      playSound(highHatPedalPad.key, highHatPedalPad.label);
+    }
+  };
 
-                        // handle crash button click
-        const handleMedButtonClick = () => {
-          const medPad = drumPads.find((p) => p.key === 'low tom');
-          if (medPad) {
-            playSound(medPad.key, medPad.label);
-          }
-        };
+  // handle high tom button click
+  const handleHighButtonClick = () => {
+    const highPad = drumPads.find((p) => p.key === 'high tom 2');
+    if (highPad) {
+      playSound(highPad.key, highPad.label);
+    }
+  };
 
-                // handle crash button click
-                const handleFloorButtonClick = () => {
-                  const floorPad = drumPads.find((p) => p.key === 'floor tom 1');
-                  if (floorPad) {
-                    playSound(floorPad.key, floorPad.label);
-                  }
-                };
+  // handle med tom button click
+  const handleMedButtonClick = () => {
+    const medPad = drumPads.find((p) => p.key === 'low tom');
+    if (medPad) {
+      playSound(medPad.key, medPad.label);
+    }
+  };
+
+  // handle floor button click
+  const handleFloorButtonClick = () => {
+    const floorPad = drumPads.find((p) => p.key === 'floor tom 1');
+    if (floorPad) {
+      playSound(floorPad.key, floorPad.label);
+    }
+  };
+
+  // handle agogo button click
+  const handleAgogo1ButtonClick = () => {
+    const floorPad = drumPads.find((p) => p.key === 'agogo High');
+    if (floorPad) {
+      playSound(floorPad.key, floorPad.label);
+    }
+  };
+
+  // handle agogo2 button click
+  const handleAgogo2ButtonClick = () => {
+    const floorPad = drumPads.find((p) => p.key === 'agogo Low');
+    if (floorPad) {
+      playSound(floorPad.key, floorPad.label);
+    }
+  };
+
+  // handle agogo2 button click
+  const handleCowbellButtonClick = () => {
+    const floorPad = drumPads.find((p) => p.key === 'cowbell');
+    if (floorPad) {
+      playSound(floorPad.key, floorPad.label);
+    }
+  };
 
   return (
     <div>
@@ -146,12 +170,16 @@ function DrumMachine() {
         <button className="hihat-btn" onClick={handleHighHatButtonClick}></button>
         <button className="crash-btn" onClick={handleCrashButtonClick}></button>
         <button className="crash2-btn" onClick={handleCrash2ButtonClick}></button>
-       <button className="ride-btn" onClick={handleRideButtonClick}></button>
+        <button className="ride-btn" onClick={handleRideButtonClick}></button>
         <button className="hihat-pedal-btn" onClick={handleHighHatPedalButtonClick}></button>
         <button className="high-tom-btn" onClick={handleHighButtonClick}></button>
         <button className="med-tom-btn" onClick={handleMedButtonClick}></button>
         <button className="floor-tom-btn" onClick={handleFloorButtonClick}></button>
- 
+
+        <button className="agogo1-btn" onClick={handleAgogo1ButtonClick}></button>
+        <button className="agogo2-btn" onClick={handleAgogo2ButtonClick}></button>
+        <button className="cowbell-btn" onClick={handleCowbellButtonClick}></button>
+
       </div>
       <div className="drum-machine" id="drum-machine">
         <div className="display" id="display">{display}</div>
