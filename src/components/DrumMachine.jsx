@@ -56,29 +56,32 @@ function DrumMachine() {
     };
   }, []);
 
-    return (
-      <div>
-        <div className="image-container">
-          <img src={drumKitPic} alt="Drum Machine" />
-        </div>
-        <div className="drum-machine" id="drum-machine">
-          <div className="display" id="display">{display}</div>
-          <div className="drum-pads">
-            {drumPads.map(pad => (
-              <button
-                key={pad.key}
-                className="drum-pad"
-                id={pad.label}
-                onClick={() => playSound(pad.key, pad.label)}
-              >
-                {pad.key}
-                <audio className="clip" id={pad.key} src={pad.sound}></audio>
-              </button>
-            ))}
-          </div>
+  return (
+    <div>
+      <div className="image-container" style={{ position: 'relative' }}>
+        <img src={drumKitPic} alt="Drum Machine" style={{ width: '100%' }} />
+        {/* Non-working button layered over the image */}
+        <button className='snare-btn'></button>
+        
+      </div>
+      <div className="drum-machine" id="drum-machine">
+        <div className="display" id="display">{display}</div>
+        <div className="drum-pads">
+          {drumPads.map(pad => (
+            <button
+              key={pad.key}
+              className="drum-pad"
+              id={pad.label}
+              onClick={() => playSound(pad.key, pad.label)}
+            >
+              {pad.key}
+              <audio className="clip" id={pad.key} src={pad.sound}></audio>
+            </button>
+          ))}
         </div>
       </div>
-    );
-  }
-  
-  export default DrumMachine;
+    </div>
+  );
+}
+
+export default DrumMachine;
