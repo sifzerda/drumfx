@@ -1,8 +1,101 @@
  
  
-  button {
+button {
     margin-bottom: 20px;
     padding: 10px 20px;
     font-size: 16px;
   }
   
+.container-one {
+ padding: 20px;
+ text-align: center;
+}
+
+.container-two {
+  margin-bottom: 20px;
+ }
+ 
+ label {
+    font-size: 16px;
+    margin-right: 10px;
+ }
+ 
+input {
+      width: 80px;
+      padding: 5px;
+      font-size: 16px;
+      margin-bottom: 20px;
+      text-align: center;
+      margin-right: 10px;
+  }
+
+  input.tempo-slider {
+    width: 200px;
+  }
+
+  span {
+    margin-left: 10px;
+  }
+
+.play-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+  }
+
+.stop-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    padding: 10px 20px;
+  }
+
+  .transpose-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    padding: 10px 20px;
+  }
+
+.sheetref {
+  margin-top: 20px;
+}
+
+.container-three {
+  margin-bottom: 20px;
+}
+
+.container-four {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.container-five {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+  position: relative;
+  cursor: pointer;
+  border-radius: 4px;
+}

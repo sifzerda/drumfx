@@ -1,6 +1,7 @@
 // src/pages/Contact.js
 import SheetMusicEditor from '../components/SheetMusicEditor';
 import '../App.css';
+import '../spare.css';
 
 const Contact = () => {
   return (

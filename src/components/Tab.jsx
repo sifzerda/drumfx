@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { Howl } from 'howler';
 import abcjs from 'abcjs';
 
@@ -43,6 +43,7 @@ const Tab = () => {
   const [tempo, setTempo] = useState(100); // Default tempo
   const intervalRef = useRef(null);
   const sheetRef = useRef(null);
+  const [bars, setBars] = useState([]);
 
   const toggleNote = (row, step) => {
     const newPattern = { ...pattern };
@@ -96,23 +97,23 @@ const Tab = () => {
   const handleRightClick = (e, row) => {
     e.preventDefault();
     if (row === 'snare') {
-      const nextSnare = currentSnare === 'snare'
-        ? 'rimshot'
-        : currentSnare === 'rimshot'
-        ? 'sidestick'
-        : 'snare';
+      const nextSnare =
+        currentSnare === 'snare'
+          ? 'rimshot'
+          : currentSnare === 'rimshot'
+          ? 'sidestick'
+          : 'snare';
       setCurrentSnare(nextSnare);
     } else if (row === 'crash') {
-      const nextCrash = currentCrash === 'crash'
-        ? 'crashChoke'
-        : 'crash';
+      const nextCrash = currentCrash === 'crash' ? 'crashChoke' : 'crash';
       setCurrentCrash(nextCrash);
     } else if (row === 'rideCymbal') {
-      const nextRide = currentRide === 'rideCymbal'
-        ? 'rideBell'
-        : currentRide === 'rideBell'
-        ? 'rideChoke'
-        : 'rideCymbal';
+      const nextRide =
+        currentRide === 'rideCymbal'
+          ? 'rideBell'
+          : currentRide === 'rideBell'
+          ? 'rideChoke'
+          : 'rideCymbal';
       setCurrentRide(nextRide);
     }
   };
@@ -129,6 +130,10 @@ const Tab = () => {
   );
 
   const transposeToSheet = () => {
+    // Append the current pattern as a new bar
+    const newBars = [...bars, pattern];
+    setBars(newBars);
+  
     // Create ABC notation with multiple voices for each drum part
     let abcNotation = 'X:1\nT:Drum Pattern\nM:4/4\nL:1/16\nK:C\n';
   
@@ -144,130 +149,84 @@ const Tab = () => {
       floorTom: 'C,',
     };
   
-    for (let step = 0; step < 16; step++) {
-      let stepPattern = '';
-      Object.keys(pattern).forEach((drum) => {
-        if (pattern[drum][step]) {
-          stepPattern += drumMap[drum];
-        }
-      });
-      // If there are multiple drum hits at the same time, put them in brackets
-      abcNotation += stepPattern ? `[${stepPattern}]` : 'z';
-    }
+    newBars.forEach((bar) => {
+      for (let step = 0; step < 16; step++) {
+        let stepPattern = '';
+        Object.keys(bar).forEach((drum) => {
+          if (bar[drum][step]) {
+            stepPattern += drumMap[drum];
+          }
+        });
+        // If there are multiple drum hits at the same time, put them in brackets
+        abcNotation += stepPattern ? `[${stepPattern}]` : 'z';
+      }
+      abcNotation += '|'; // Add a barline at the end of each bar
+    });
   
     // Display the sheet music using abcjs
     abcjs.renderAbc(sheetRef.current, abcNotation);
   };
 
   return (
-    <div style={{ padding: '20px', textAlign: 'center' }}>
-      <h1>Drum Machine</h1>
-
-      <div style={{ marginBottom: '20px' }}>
-        <label style={{ marginRight: '10px' }}>Tempo:</label>
+    <div className="container-one">
+      <h1>Playback Controls</h1>
+      <div className="container-two">
+        <label>Tempo:</label>
         <input
           type="number"
           value={tempo}
           onChange={handleTempoChange}
           min="40"
           max="200"
-          style={{
-            width: '80px',
-            padding: '5px',
-            fontSize: '16px',
-            textAlign: 'center',
-            marginRight: '10px',
-          }}
         />
         <input
+          className="tempo-slider"
           type="range"
           value={tempo}
           onChange={handleTempoChange}
           min="40"
           max="200"
-          style={{
-            width: '200px',
-          }}
         />
-        <span style={{ marginLeft: '10px' }}>BPM</span>
+        <span>BPM</span>
       </div>
 
-      <button
-        onClick={playPattern}
-        style={{
-          padding: '10px 20px',
-          fontSize: '16px',
-          backgroundColor: '#007bff',
-          color: 'white',
-          border: 'none',
-          borderRadius: '5px',
-          cursor: 'pointer',
-          marginBottom: '20px',
-        }}
-      >
+      <button className="play-btn" onClick={playPattern}>
         Play Pattern
       </button>
-
-      <button
-        onClick={stopPattern}
-        style={{
-          padding: '10px 20px',
-          fontSize: '16px',
-          backgroundColor: '#dc3545',
-          color: 'white',
-          border: 'none',
-          borderRadius: '5px',
-          cursor: 'pointer',
-          marginBottom: '20px',
-          marginLeft: '10px',
-        }}
-      >
+      <button className="stop-btn" onClick={stopPattern}>
         Stop Pattern
       </button>
 
-      <button
-        onClick={transposeToSheet}
-        style={{
-          padding: '10px 20px',
-          fontSize: '16px',
-          backgroundColor: '#28a745',
-          color: 'white',
-          border: 'none',
-          borderRadius: '5px',
-          cursor: 'pointer',
-          marginBottom: '20px',
-        }}
-      >
+      <button className="transpose-btn" onClick={transposeToSheet}>
         Add Sheet
       </button>
 
-      <div ref={sheetRef} style={{ marginTop: '20px' }}>
-        {/* Sheet music will be rendered here */}
+      <div className="sheetref" ref={sheetRef}>
+        {/* Sheet music is rendered here */}
       </div>
 
       {Object.keys(pattern).map((row) => (
-        <div key={row} style={{ marginBottom: '20px' }}>
-          <h2>{row === 'snare' ? currentSnare : row === 'crash' ? currentCrash : row === 'rideCymbal' ? currentRide : row}</h2>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
+        <div className="container-three" key={row}>
+          <h2>
+            {row === 'snare'
+              ? currentSnare
+              : row === 'crash'
+              ? currentCrash
+              : row === 'rideCymbal'
+              ? currentRide
+              : row}
+          </h2>
+          <div className="container-four">
             {steps.map((step) => (
               <div
+                className="container-five"
                 key={step}
                 onClick={() => toggleNote(row, step)}
                 onContextMenu={(e) => handleRightClick(e, row)}
                 style={{
-                  width: '40px',
-                  height: '40px',
                   backgroundColor: pattern[row][step] ? '#4caf50' : '#e0e0e0',
-                  borderRadius: '4px',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontWeight: 'bold',
-                  fontSize: '14px',
                   color: pattern[row][step] ? 'white' : 'black',
                   userSelect: 'none',
-                  position: 'relative',
                 }}
               >
                 {step + 1}
