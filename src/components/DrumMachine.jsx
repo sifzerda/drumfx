@@ -1,5 +1,6 @@
 // src/DrumMachine.js
 import { useState, useEffect } from 'react';
+import drumKitPic from '../assets/drum-kit.jpg';
 
 // put this in separate component once finalized
 const drumPads = [
@@ -31,45 +32,50 @@ const drumPads = [
   { keyCode: 49, key: 'splash choke', sound: 'sounds/splashChoke.mp3', label: 'Splash Choke' }, // key: X];
 ];
 
-  function DrumMachine() {
-    const [display, setDisplay] = useState('');
-  
-    const playSound = (key, label) => {
-      const audio = document.getElementById(key);
-      audio.currentTime = 0;
-      audio.play();
-      setDisplay(label);
+function DrumMachine() {
+  const [display, setDisplay] = useState('');
+
+  const playSound = (key, label) => {
+    const audio = document.getElementById(key);
+    audio.currentTime = 0;
+    audio.play();
+    setDisplay(label);
+  };
+
+  const handleKeyPress = (e) => {
+    const pad = drumPads.find(p => p.keyCode === e.keyCode);
+    if (pad) {
+      playSound(pad.key, pad.label);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyPress);
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress);
     };
-  
-    const handleKeyPress = (e) => {
-      const pad = drumPads.find(p => p.keyCode === e.keyCode);
-      if (pad) {
-        playSound(pad.key, pad.label);
-      }
-    };
-  
-    useEffect(() => {
-      document.addEventListener('keydown', handleKeyPress);
-      return () => {
-        document.removeEventListener('keydown', handleKeyPress);
-      };
-    }, []);
-  
+  }, []);
+
     return (
-      <div className="drum-machine" id="drum-machine">
-        <div className="display" id="display">{display}</div>
-        <div className="drum-pads">
-          {drumPads.map(pad => (
-            <button
-              key={pad.key}
-              className="drum-pad"
-              id={pad.label}
-              onClick={() => playSound(pad.key, pad.label)}
-            >
-              {pad.key}
-              <audio className="clip" id={pad.key} src={pad.sound}></audio>
-            </button>
-          ))}
+      <div>
+        <div className="image-container">
+          <img src={drumKitPic} alt="Drum Machine" />
+        </div>
+        <div className="drum-machine" id="drum-machine">
+          <div className="display" id="display">{display}</div>
+          <div className="drum-pads">
+            {drumPads.map(pad => (
+              <button
+                key={pad.key}
+                className="drum-pad"
+                id={pad.label}
+                onClick={() => playSound(pad.key, pad.label)}
+              >
+                {pad.key}
+                <audio className="clip" id={pad.key} src={pad.sound}></audio>
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     );

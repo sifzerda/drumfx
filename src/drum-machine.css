@@ -27,10 +27,12 @@
   .drum-pad {
     background-color: #333;
     color: white;
-    border: none;
+    border: 1px solid #ccc;
     border-radius: 5px;
+    border-radius: 5px;
+    margin: 5px;
     padding: 20px;
-    font-size: 1.5em;
+    font-size: 1em;
     cursor: pointer;
     transition: background-color 0.2s ease;
   }
@@ -38,3 +40,16 @@
   .drum-pad:active {
     background-color: #666;
   }
+
+  /* -------------- interactive drum kit image ------------------*/
+
+  .image-container {
+    text-align: center;
+    margin-bottom: 20px; /* Space between image and drum machine */
+  }
+  
+  .image-container img {
+    max-width: 100%; /* Adjust this if needed */
+    height: auto;
+  }
+  

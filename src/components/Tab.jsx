@@ -6,19 +6,19 @@ import abcjs from "abcjs";
 const createSound = (src) => new Howl({ src, html5: true });
 
 const sounds = {
-  kick: createSound("../../public/sounds/kick1.mp3"),
-  snare: createSound("../../public/sounds/snareOn1.mp3"),
-  rimshot: createSound("../../public/sounds/rimshot1.mp3"),
-  sidestick: createSound("../../public/sounds/crosstick2.mp3"),
-  hiHat: createSound("../../public/sounds/hhX1.mp3"),
-  crash: createSound("../../public/sounds/crash1.mp3"),
-  crashChoke: createSound("../../public/sounds/crashChoke.mp3"),
-  rideCymbal: createSound("../../public/sounds/rideEdge1.mp3"),
-  rideBell: createSound("../../public/sounds/rideBell1.mp3"),
-  rideChoke: createSound("../../public/sounds/rideChoke1.mp3"),
-  highTom: createSound("../../public/sounds/hTom1.mp3"),
-  mediumTom: createSound("../../public/sounds/mTom1.mp3"),
-  floorTom: createSound("../../public/sounds/fTom1.mp3"),
+  kick: createSound("/sounds/kick1.mp3"),
+  snare: createSound("/sounds/snareOn1.mp3"),
+  rimshot: createSound("/sounds/rimshot1.mp3"),
+  sidestick: createSound("/sounds/crosstick2.mp3"),
+  hiHat: createSound("/sounds/hhX1.mp3"),
+  crash: createSound("/sounds/crash1.mp3"),
+  crashChoke: createSound("/sounds/crashChoke.mp3"),
+  rideCymbal: createSound("/sounds/rideEdge1.mp3"),
+  rideBell: createSound("/sounds/rideBell1.mp3"),
+  rideChoke: createSound("/sounds/rideChoke1.mp3"),
+  highTom: createSound("/sounds/hTom1.mp3"),
+  mediumTom: createSound("/sounds/mTom1.mp3"),
+  floorTom: createSound("/sounds/fTom1.mp3"),
 };
 
 // Create a pattern with 16 steps
