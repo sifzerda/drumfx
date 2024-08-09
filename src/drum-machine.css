@@ -60,6 +60,7 @@
 .high-hat-btn,
 .hihat-btn,
 .crash-btn,
+.crash2-btn,
 .ride-btn,
 .hihat-pedal-btn,
 .high-tom-btn,
@@ -118,10 +119,23 @@
   border-radius: 50%;
   cursor: pointer;
   font-size: 16px;
-  z-index: 5;
+  z-index: 11;
 }
 
 .ride-btn {
+  top: 44%;
+  left: 67%;
+  width: 9.5vw;
+  height: 8vw;
+  padding: 25px 25px;
+  border: solid 2px rgb(2, 53, 49) !important;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  z-index: 5;
+}
+
+.crash2-btn {
   top: 11%;
   left: 57%;
   width: 12vw;
