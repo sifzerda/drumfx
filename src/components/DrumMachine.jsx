@@ -56,12 +56,20 @@ function DrumMachine() {
     };
   }, []);
 
+  // snare pad img onclick
+  const handleSnareButtonClick = () => {
+    const snarePad = drumPads.find(p => p.key === 'snare (on)');
+    if (snarePad) {
+      playSound(snarePad.key, snarePad.label);
+    }
+  };
+
   return (
     <div>
       <div className="image-container" style={{ position: 'relative' }}>
         <img src={drumKitPic} alt="Drum Machine" style={{ width: '100%' }} />
         {/* Non-working button layered over the image */}
-        <button className='snare-btn'></button>
+        <button className='snare-btn' onClick={handleSnareButtonClick}></button>
         
       </div>
       <div className="drum-machine" id="drum-machine">
