@@ -129,14 +129,32 @@ const Tab = () => {
   );
 
   const transposeToSheet = () => {
-    // Create ABC notation based on the pattern
-    let abcNotation = 'X:1\nT:Drum Pattern\nM:4/4\nL:1/4\nK:C\n';
-
-    Object.keys(pattern).forEach((drum, rowIndex) => {
-      let drumPattern = pattern[drum].map((hit) => (hit ? 'x' : '-')).join('');
-      abcNotation += `V:1\n${drumPattern} | `;
-    });
-
+    // Create ABC notation with multiple voices for each drum part
+    let abcNotation = 'X:1\nT:Drum Pattern\nM:4/4\nL:1/16\nK:C\n';
+  
+    // Map each drum to a unique note representation
+    const drumMap = {
+      kick: 'C,,',
+      snare: 'D,,',
+      hiHat: 'E,,',
+      crash: 'F,,',
+      rideCymbal: 'G,,',
+      highTom: 'A,,',
+      mediumTom: 'B,,',
+      floorTom: 'C,',
+    };
+  
+    for (let step = 0; step < 16; step++) {
+      let stepPattern = '';
+      Object.keys(pattern).forEach((drum) => {
+        if (pattern[drum][step]) {
+          stepPattern += drumMap[drum];
+        }
+      });
+      // If there are multiple drum hits at the same time, put them in brackets
+      abcNotation += stepPattern ? `[${stepPattern}]` : 'z';
+    }
+  
     // Display the sheet music using abcjs
     abcjs.renderAbc(sheetRef.current, abcNotation);
   };
@@ -232,21 +250,29 @@ const Tab = () => {
           <h2>{row === 'snare' ? currentSnare : row === 'crash' ? currentCrash : row === 'rideCymbal' ? currentRide : row}</h2>
           <div style={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
             {steps.map((step) => (
-              <React.Fragment key={step}>
-                <button
-                  onClick={() => toggleNote(row, step)}
-                  onContextMenu={(e) => handleRightClick(e, row)} // Add right-click handler for all rows
-                  style={{
-                    width: '30px',
-                    height: '30px',
-                    backgroundColor: pattern[row][step] ? '#007bff' : '#ccc',
-                    border: 'none',
-                    borderRadius: '5px',
-                    cursor: 'pointer',
-                  }}
-                />
-                {(step + 1) % 8 === 0 && <Barline />} {/* Insert barline every 8 steps */}
-              </React.Fragment>
+              <div
+                key={step}
+                onClick={() => toggleNote(row, step)}
+                onContextMenu={(e) => handleRightClick(e, row)}
+                style={{
+                  width: '40px',
+                  height: '40px',
+                  backgroundColor: pattern[row][step] ? '#4caf50' : '#e0e0e0',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontWeight: 'bold',
+                  fontSize: '14px',
+                  color: pattern[row][step] ? 'white' : 'black',
+                  userSelect: 'none',
+                  position: 'relative',
+                }}
+              >
+                {step + 1}
+                {step % 4 === 3 && <Barline />}
+              </div>
             ))}
           </div>
         </div>
