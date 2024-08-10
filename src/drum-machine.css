@@ -44,6 +44,7 @@
 /* -------------- interactive drum kit image ------------------*/
 
 .image-container {
+  position: relative;
   text-align: center;
   margin-bottom: 20px;
   /* Space between image and drum machine */
@@ -53,6 +54,10 @@
   max-width: 100%;
   /* Adjust this if needed */
   height: auto;
+}
+
+img {
+  width: 100%;
 }
 
 .snare-btn,

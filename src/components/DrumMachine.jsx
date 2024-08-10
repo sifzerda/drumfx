@@ -64,6 +64,15 @@ function DrumMachine() {
     }
   };
 
+  // snare pad right-click
+  const handleSnareRightClick = (e) => {
+    e.preventDefault(); // Prevent the context menu from opening
+    const snareRightClickPad = drumPads.find((p) => p.key === 'snare rimshot');
+    if (snareRightClickPad) {
+      playSound(snareRightClickPad.key, snareRightClickPad.label);
+    }
+  };
+
   // handle kick button click
   const handleKickButtonClick = () => {
     const kickPad = drumPads.find((p) => p.key === 'kick');
@@ -162,10 +171,12 @@ function DrumMachine() {
 
   return (
     <div>
-      <div className="image-container" style={{ position: 'relative' }}>
-        <img src={drumKitPic} alt="Drum Machine" style={{ width: '100%' }} />
-        {/* Non-working button layered over the image */}
-        <button className="snare-btn" onClick={handleSnareButtonClick}></button>
+      <div className="image-container">
+        <img src={drumKitPic} alt="Drum Machine"/>
+
+        {/* Right-click event listener snare/rimshot */}
+        <button className='snare-btn' onClick={handleSnareButtonClick} onContextMenu={handleSnareRightClick}></button>
+
         <button className="kick-btn" onClick={handleKickButtonClick}></button>
         <button className="hihat-btn" onClick={handleHighHatButtonClick}></button>
         <button className="crash-btn" onClick={handleCrashButtonClick}></button>

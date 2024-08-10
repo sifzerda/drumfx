@@ -41,11 +41,11 @@ const Tab = () => {
   const [currentSnare, setCurrentSnare] = useState("snare");
   const [currentCrash, setCurrentCrash] = useState("crash");
   const [currentRide, setCurrentRide] = useState("rideCymbal");
-
   const [tempo, setTempo] = useState(100); // Default tempo
+  const [bars, setBars] = useState([]);
+
   const intervalRef = useRef(null);
   const sheetRef = useRef(null);
-  const [bars, setBars] = useState([]);
 
   const toggleNote = (row, step) => {
     const newPattern = { ...pattern };
