@@ -68,6 +68,7 @@ img {
 .crash-btn,
 .crash2-btn,
 .ride-btn,
+.ride2-btn,
 .hihat-pedal-btn,
 .high-tom-btn,
 .med-tom-btn,
@@ -79,6 +80,8 @@ img {
   background-color: transparent;
   border-radius: 50%;
   cursor: pointer;
+  padding: 25px 25px;
+  font-size: 16px;
 }
 
 .snare-btn {
@@ -86,9 +89,7 @@ img {
   left: 36%;
   width: 7vw;
   height: 6.1vw;
-  padding: 25px 25px;
   border: solid 2px rgb(94, 255, 0) !important;
-  font-size: 16px;
   z-index: 2;
 }
 
@@ -97,9 +98,7 @@ img {
   left: 36%;
   width: 7vw;
   height: 2vw;
-  padding: 25px 25px;
   border: solid 2px rgb(94, 255, 0) !important;
-  font-size: 16px;
   z-index: 2;
 }
 
@@ -108,9 +107,7 @@ img {
   left: 44%;
   width: 9.7vw;
   height: 12vw;
-  padding: 25px 25px;
   border: solid 2px rgb(234, 0, 255) !important;
-  font-size: 16px;
   z-index: 3;
 }
 
@@ -119,9 +116,7 @@ img {
   left: 24%;
   width: 8vw;
   height: 5.5vw;
-  padding: 25px 25px;
   border: solid 2px rgb(255, 17, 0) !important;
-  font-size: 16px;
   z-index: 4;
 }
 
@@ -130,9 +125,7 @@ img {
   left: 30%;
   width: 9.9vw;
   height: 10vw;
-  padding: 25px 25px;
   border: solid 2px rgb(0, 255, 234) !important;
-  font-size: 16px;
   z-index: 11;
 }
 
@@ -141,10 +134,17 @@ img {
   left: 67%;
   width: 9.5vw;
   height: 8vw;
-  padding: 25px 25px;
   border: solid 2px rgb(2, 53, 49) !important;
-  font-size: 16px;
   z-index: 5;
+}
+
+.ride2-btn {
+  top: 50%;
+  left: 71%;
+  width: 2vw;
+  height: 2vw;
+  border: solid 2px rgb(2, 53, 49) !important;
+  z-index: 9;
 }
 
 .crash2-btn {
@@ -152,9 +152,7 @@ img {
   left: 57%;
   width: 12vw;
   height: 12vw;
-  padding: 25px 25px;
   border: solid 2px rgb(4, 0, 255) !important;
-  font-size: 16px;
   z-index: 6;
 }
 
@@ -163,9 +161,7 @@ img {
   left: 33%;
   width: 3vw;
   height: 3vh;
-  padding: 25px 25px;
   border: solid 2px rgb(255, 153, 0) !important;
-  font-size: 16px;
   z-index: 7;
 }
 
@@ -174,9 +170,7 @@ img {
   left: 42%;
   width: 6vw;
   height: 6vw;
-  padding: 25px 25px;
   border: solid 2px rgb(12, 78, 29) !important;
-  font-size: 16px;
   z-index: 8;
 }
 
@@ -185,9 +179,7 @@ img {
   left: 50%;
   width: 6vw;
   height: 6vw;
-  padding: 25px 25px;
   border: solid 2px rgb(99, 91, 100) !important;
-  font-size: 16px;
   z-index: 9;
 }
 
@@ -196,9 +188,7 @@ img {
   left: 55%;
   width: 9vw;
   height: 9vw;
-  padding: 25px 25px;
   border: solid 2px rgb(255, 238, 0) !important;
-  font-size: 16px;
   z-index: 10;
 }
 
@@ -207,9 +197,7 @@ img {
   left: 32%;
   width: 3vw;
   height: 3vw;
-  padding: 25px 25px;
   border: solid 2px rgb(255, 238, 0) !important;
-  font-size: 16px;
   z-index: 10;
 }
 
@@ -218,9 +206,7 @@ img {
   left: 27%;
   width: 6vw;
   height: 3vh;
-  padding: 25px 25px;
   border: solid 2px rgb(255, 17, 0) !important;
-  font-size: 16px;
   z-index: 10;
 }
 
@@ -229,8 +215,6 @@ img {
   left: 62%;
   width: 5vw;
   height: 5vw;
-  padding: 25px 25px;
   border: solid 2px rgb(9, 255, 0) !important;
-  font-size: 16px;
   z-index: 10;
 }

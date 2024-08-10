@@ -139,6 +139,22 @@ function DrumMachine() {
     }
   };
 
+  const handleRideRightClick = (e) => {
+    e.preventDefault(); // Prevent the context menu from opening
+    const rideRightClickPad = drumPads.find((p) => p.key === 'ride bell');
+    if (rideRightClickPad) {
+      playSound(rideRightClickPad.key, rideRightClickPad.label);
+    }
+  }
+
+  const handleRideRightClick2 = (e) => {
+    e.preventDefault(); // Prevent the context menu from opening
+    const rideRightClickPad = drumPads.find((p) => p.key === 'ride choke');
+    if (rideRightClickPad) {
+      playSound(rideRightClickPad.key, rideRightClickPad.label);
+    }
+  }
+
   // handle hh pedal button click
   const handleHighHatPedalButtonClick = () => {
     const highHatPedalPad = drumPads.find((p) => p.key === 'high-hat pedal');
@@ -204,15 +220,18 @@ function DrumMachine() {
         <button className='snare-btn' onClick={handleSnareButtonClick} onContextMenu={handleSnareRightClick}></button>
         <button className='snare2-btn' onContextMenu={handleSnareRightClick2}></button>
 
-
         <button className="kick-btn" onClick={handleKickButtonClick}></button>
         <button className="hihat-btn" onClick={handleHighHatButtonClick}></button>
-               {/* Right-click event listener crash/choke */}
+        {/* Right-click event listener crash/choke */}
         <button className='crash-btn' onClick={handleCrashButtonClick}onContextMenu={handleCrash2RightClick}></button>
-               {/* Right-click event listener crash/choke */}
+        {/* Right-click event listener crash/choke */}
         <button className="crash2-btn" onClick={handleCrash2ButtonClick}onContextMenu={handleCrashRightClick}></button>
-      
-        <button className="ride-btn" onClick={handleRideButtonClick}></button>
+       {/* Right-click event listener ride /choke */}
+        <button className="ride-btn" onClick={handleRideButtonClick}onContextMenu={handleRideRightClick2}></button>
+        
+       {/* Smaller event listener for ride bell */}
+        <button className="ride2-btn" onContextMenu={handleRideRightClick}></button>
+        
         <button className="hihat-pedal-btn" onClick={handleHighHatPedalButtonClick}></button>
         <button className="high-tom-btn" onClick={handleHighButtonClick}></button>
         <button className="med-tom-btn" onClick={handleMedButtonClick}></button>
