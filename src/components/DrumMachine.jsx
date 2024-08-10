@@ -73,6 +73,15 @@ function DrumMachine() {
     }
   };
 
+    // snare pad right-click
+    const handleSnareRightClick2 = (e) => {
+      e.preventDefault(); // Prevent the context menu from opening
+      const snareRightClickPad2 = drumPads.find((p) => p.key === 'side-stick 1');
+      if (snareRightClickPad2) {
+        playSound(snareRightClickPad2.key, snareRightClickPad2.label);
+      }
+    };
+
   // handle kick button click
   const handleKickButtonClick = () => {
     const kickPad = drumPads.find((p) => p.key === 'kick');
@@ -97,6 +106,15 @@ function DrumMachine() {
     }
   };
 
+  // handle crash right-click
+  const handleCrashRightClick = (e) => {
+    e.preventDefault(); // Prevent the context menu from opening
+    const crashRightClickPad = drumPads.find((p) => p.key === 'crash choke');
+    if (crashRightClickPad) {
+      playSound(crashRightClickPad.key, crashRightClickPad.label);
+    }
+  };
+
   // handle crash2 button click
   const handleCrash2ButtonClick = () => {
     const crash2Pad = drumPads.find((p) => p.key === 'crash 1');
@@ -104,6 +122,14 @@ function DrumMachine() {
       playSound(crash2Pad.key, crash2Pad.label);
     }
   };
+
+  const handleCrash2RightClick = (e) => {
+    e.preventDefault(); // Prevent the context menu from opening
+    const crash2RightClickPad = drumPads.find((p) => p.key === 'crash 2 choke');
+    if (crash2RightClickPad) {
+      playSound(crash2RightClickPad.key, crash2RightClickPad.label);
+    }
+  }
 
   // handle ride button click
   const handleRideButtonClick = () => {
@@ -176,11 +202,16 @@ function DrumMachine() {
 
         {/* Right-click event listener snare/rimshot */}
         <button className='snare-btn' onClick={handleSnareButtonClick} onContextMenu={handleSnareRightClick}></button>
+        <button className='snare2-btn' onContextMenu={handleSnareRightClick2}></button>
+
 
         <button className="kick-btn" onClick={handleKickButtonClick}></button>
         <button className="hihat-btn" onClick={handleHighHatButtonClick}></button>
-        <button className="crash-btn" onClick={handleCrashButtonClick}></button>
-        <button className="crash2-btn" onClick={handleCrash2ButtonClick}></button>
+               {/* Right-click event listener crash/choke */}
+        <button className='crash-btn' onClick={handleCrashButtonClick}onContextMenu={handleCrash2RightClick}></button>
+               {/* Right-click event listener crash/choke */}
+        <button className="crash2-btn" onClick={handleCrash2ButtonClick}onContextMenu={handleCrashRightClick}></button>
+      
         <button className="ride-btn" onClick={handleRideButtonClick}></button>
         <button className="hihat-pedal-btn" onClick={handleHighHatPedalButtonClick}></button>
         <button className="high-tom-btn" onClick={handleHighButtonClick}></button>
