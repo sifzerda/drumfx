@@ -42,8 +42,8 @@ const Tab = () => {
   const [currentCrash, setCurrentCrash] = useState("crash");
   const [currentRide, setCurrentRide] = useState("rideCymbal");
   const [tempo, setTempo] = useState(100); // Default tempo
-
   const vexflowRef = useRef(null);
+
   const intervalRef = useRef(null);
 
   const toggleNote = (row, step) => {
@@ -151,12 +151,26 @@ const Tab = () => {
       if (pattern.floorTom[step]) keys.push("G/3");
 
       if (keys.length > 0) {
-        notes.push(
-          new VF.StaveNote({
+        // Check for hi-hat and add custom SVG rendering if necessary
+        if (pattern.hiHat[step]) {
+          note = new VF.StaveNote({
+            keys: ["F#/4"],
+            duration: "q",
+            stem_direction: 1
+          });
+          note.setKeyStyle("F#/4", { fillStyle: "black", strokeStyle: "black" });
+          note.addModifier(new VF.Modifier({
+            x: note.getAbsoluteX(),
+            y: note.getAbsoluteY() - 10,
+            svg: `<text x="0" y="0" font-size="16" font-family="Arial" fill="black">x</text>`
+          }));
+        } else {
+          note = new VF.StaveNote({
             keys: keys,
             duration: "q",
-          })
-        );
+          });
+        }
+        notes.push(note);
       } else {
         notes.push(
           new VF.StaveNote({

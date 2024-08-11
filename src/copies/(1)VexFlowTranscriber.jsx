@@ -139,7 +139,6 @@ const Tab = () => {
     // Convert the pattern to VexFlow notes
     steps.forEach((step) => {
       const keys = [];
-      let note;
 
       if (pattern.kick[step]) keys.push("C/4");
       if (pattern.snare[step]) keys.push("D/4");
@@ -213,21 +212,36 @@ const Tab = () => {
       <div ref={vexflowRef} />
 {/* ---------------------------------------------------------- */}
       {Object.keys(pattern).map((row) => (
-        <div key={row} className="row">
-          <h2 onContextMenu={(e) => handleRightClick(e, row)}>{row}</h2>
-          {steps.map((step) => (
-            <button
-              key={step}
-              className={`step-btn ${
-                pattern[row][step] ? "active" : ""
-              }`}
-              onClick={() => toggleNote(row, step)}
-            >
-              {pattern[row][step] ? "⚫" : "⚪"}
-            </button>
-          ))}
+        <div className="container-three" key={row}>
+          <h2>
+            {row === "snare"
+              ? currentSnare
+              : row === "crash"
+              ? currentCrash
+              : row === "rideCymbal"
+              ? currentRide
+              : row}
+          </h2>
+          <div className="container-four">
+            {steps.map((step) => (
+              <div
+                className="container-five"
+                key={step}
+                onClick={() => toggleNote(row, step)}
+                onContextMenu={(e) => handleRightClick(e, row)}
+                style={{
+                  backgroundColor: pattern[row][step] ? "#4caf50" : "#e0e0e0",
+                  color: pattern[row][step] ? "white" : "black",
+                  userSelect: "none",
+                }}
+              >
+                {step + 1}
+              </div>
+            ))}
+          </div>
         </div>
       ))}
+
     </div>
   );
 };
