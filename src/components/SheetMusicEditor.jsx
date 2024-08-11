@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import { Howl } from "howler";
+import Vex from "vexflow";
 
 // Define the drum sounds
 const createSound = (src) => new Howl({ src, html5: true });
@@ -41,6 +42,7 @@ const Tab = () => {
   const [currentCrash, setCurrentCrash] = useState("crash");
   const [currentRide, setCurrentRide] = useState("rideCymbal");
   const [tempo, setTempo] = useState(100); // Default tempo
+  const vexflowRef = useRef(null);
 
   const intervalRef = useRef(null);
 
@@ -117,7 +119,61 @@ const Tab = () => {
     }
   };
 
+  const addToSheet = () => {
+    if (!vexflowRef.current) return;
 
+    // Create VexFlow renderer
+    const VF = Vex.Flow;
+    const div = vexflowRef.current;
+    div.innerHTML = ""; // Clear existing sheet music
+
+    const renderer = new VF.Renderer(div, VF.Renderer.Backends.SVG);
+    renderer.resize(500, 200);
+    const context = renderer.getContext();
+    const stave = new VF.Stave(10, 40, 400);
+
+    stave.addClef("percussion").setContext(context).draw();
+
+    const notes = [];
+
+    // Convert the pattern to VexFlow notes
+    steps.forEach((step) => {
+      const keys = [];
+
+      if (pattern.kick[step]) keys.push("C/4");
+      if (pattern.snare[step]) keys.push("D/4");
+      if (pattern.hiHat[step]) keys.push("F#/4");
+      if (pattern.crash[step]) keys.push("G/4");
+      if (pattern.rideCymbal[step]) keys.push("A/4");
+      if (pattern.highTom[step]) keys.push("B/4");
+      if (pattern.mediumTom[step]) keys.push("E/4");
+      if (pattern.floorTom[step]) keys.push("G/3");
+
+      if (keys.length > 0) {
+        notes.push(
+          new VF.StaveNote({
+            keys: keys,
+            duration: "q",
+          })
+        );
+      } else {
+        notes.push(
+          new VF.StaveNote({
+            keys: ["b/4"], // Rest note
+            duration: "qr",
+          })
+        );
+      }
+    });
+
+    // Create a voice and add the notes
+    const voice = new VF.Voice({ num_beats: 16, beat_value: 4 });
+    voice.addTickables(notes);
+
+    // Format and draw
+    new VF.Formatter().joinVoices([voice]).format([voice], 400);
+    voice.draw(context, stave);
+  };
 
   return (
     <div className="container-one">
@@ -147,6 +203,9 @@ const Tab = () => {
       </button>
       <button className="stop-btn" onClick={stopPattern}>
         Stop Pattern
+      </button>
+      <button className="add-to-sheet-btn" onClick={addToSheet}>
+        Add to Sheet
       </button>
 
       {Object.keys(pattern).map((row) => (
@@ -179,6 +238,8 @@ const Tab = () => {
           </div>
         </div>
       ))}
+
+      <div ref={vexflowRef} />
     </div>
   );
 };
