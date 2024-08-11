@@ -208,6 +208,9 @@ const Tab = () => {
         Add to Sheet
       </button>
 
+{/* ------------------ sheet transcription ------------------- */}
+      <div ref={vexflowRef} />
+{/* ---------------------------------------------------------- */}
       {Object.keys(pattern).map((row) => (
         <div className="container-three" key={row}>
           <h2>
@@ -239,7 +242,6 @@ const Tab = () => {
         </div>
       ))}
 
-      <div ref={vexflowRef} />
     </div>
   );
 };
