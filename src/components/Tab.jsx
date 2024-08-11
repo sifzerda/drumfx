@@ -143,14 +143,13 @@ const Tab = () => {
   
       // Map each drum to a unique note representation
       const drumMap = {
-        kick: "C,,",
-        snare: "D,,",
-        hiHat: "E,,",
-        crash: "F,,",
-        rideCymbal: "G,,",
-        highTom: "A,,",
-        mediumTom: "B,,",
-        floorTom: "C,",
+        kick: "e,", //
+        snare: "c", //
+        hiHat: "x", //
+        crash: "A'",  //
+        highTom: "e", //
+        mediumTom: "d", //
+        floorTom: "a,", //
       };
   
       // Group bars into sets of four for line breaks
